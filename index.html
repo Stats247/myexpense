@@ -1,75 +1,1901 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>My Money | Personal Finance</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Money | Personal & Household Finance Manager</title>
 <style>
-:root{--green:#16845f;--green2:#e8f4ef;--blue:#2867b2;--blue2:#eaf1fc;--teal:#0c9488;--teal2:#e1f3f1;--ink:#18324b;--muted:#64758a;--line:#e2e9ef;--white:#fff;--red:#c44848;--amber:#c07a22;--shadow:0 6px 22px rgba(25,54,82,.07);}
-*{box-sizing:border-box}body{margin:0;background:#f5f8fb;color:var(--ink);font:15px/1.5 Inter,system-ui,Segoe UI,Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:10px 14px;font-weight:650}button.primary{background:var(--teal);color:white}button.secondary{background:var(--blue2);color:var(--blue)}button.danger{background:#fff0f0;color:var(--red)}button.small{padding:6px 10px;font-size:13px}button:disabled{opacity:.5;cursor:not-allowed}.app{display:flex;min-height:100vh}.sidebar{width:245px;background:#fff;border-right:1px solid var(--line);padding:22px 15px;flex-shrink:0}.brand{font-size:23px;font-weight:850;letter-spacing:.3px;color:var(--green);padding:8px 10px 24px}.brand small{display:block;color:var(--muted);font-size:11px;font-weight:500;letter-spacing:1px}.nav{display:grid;gap:6px}.nav button{text-align:left;background:transparent;color:#53677d;padding:12px;border-radius:10px}.nav button.active,.nav button:hover{background:var(--teal2);color:#08766d}.sidebar-footer{margin-top:35px;color:var(--muted);font-size:12px;padding:10px}.main{flex:1;min-width:0}.topbar{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;background:white;border-bottom:1px solid var(--line);gap:12px;flex-wrap:wrap}.topbar h1{margin:0;font-size:21px}.top-actions{display:flex;gap:8px;align-items:center}.period{border:1px solid var(--line);border-radius:9px;padding:8px;background:white;color:var(--ink)}.content{padding:24px;max-width:1400px;margin:auto}.grid{display:grid;gap:16px}.cards{grid-template-columns:repeat(4,minmax(0,1fr))}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.metric-label{color:var(--muted);font-size:13px}.metric{font-size:25px;font-weight:800;margin:5px 0;color:var(--ink)}.metric-foot{font-size:12px;color:var(--muted)}.section-grid{grid-template-columns:1.3fr 1fr;margin-top:17px}.card h2,.card h3{margin:0 0 12px;font-size:16px}.subtle{color:var(--muted)}.bar-row{margin:14px 0}.bar-head{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}.bar{height:9px;background:#edf2f6;border-radius:20px;overflow:hidden}.bar span{display:block;height:100%;background:var(--teal);border-radius:20px}.bucket-list{display:grid;gap:12px}.bucket{border:1px solid var(--line);border-radius:12px;padding:12px}.bucket-top{display:flex;justify-content:space-between;gap:8px}.bucket-title{font-weight:700}.pill{display:inline-block;border-radius:50px;padding:3px 9px;font-size:12px;background:var(--green2);color:var(--green)}.pill.warn{background:#fff4df;color:var(--amber)}.pill.bad{background:#ffeded;color:var(--red)}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:680px}.table th,.table td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:13px;white-space:nowrap}.table th{color:var(--muted);font-weight:650;background:#f8fafc}.empty{padding:28px;text-align:center;color:var(--muted)}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:grid;gap:6px}.field label{font-size:13px;font-weight:650;color:#4c6076}.field input,.field select,.field textarea{border:1px solid #d7e1e9;border-radius:9px;padding:10px;background:white;width:100%;color:var(--ink)}.field textarea{min-height:115px;resize:vertical}.field.full{grid-column:1/-1}.preview{background:#f5faf9;border:1px solid #cce8e3;border-radius:12px;padding:13px;display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.preview div small{display:block;color:var(--muted)}.preview div strong{overflow-wrap:anywhere}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.status{margin:12px 0;padding:10px 12px;border-radius:10px;display:none}.status.ok{display:block;background:#e8f5ee;color:#176a48}.status.err{display:block;background:#ffeded;color:#a33d3d}.modal-bg{position:fixed;inset:0;background:#10243888;display:none;align-items:center;justify-content:center;padding:16px;z-index:20}.modal{background:white;border-radius:16px;padding:22px;max-width:560px;width:100%;max-height:90vh;overflow:auto}.modal h2{margin-top:0}.hidden{display:none!important}.tab-panel{display:none}.tab-panel.active{display:block}.inline-note{font-size:12px;color:var(--muted)}.quick-links{display:flex;gap:8px;flex-wrap:wrap}.footer-note{color:var(--muted);font-size:12px;margin-top:18px}.login-card{max-width:540px;margin:8vh auto}.login-card h2{margin-top:0}.login-card .field{margin:12px 0}.mobile-menu{display:none}
-@media(max-width:950px){.cards{grid-template-columns:repeat(2,1fr)}.section-grid{grid-template-columns:1fr}.sidebar{width:210px}}
-@media(max-width:650px){.app{display:block}.sidebar{width:auto;display:none;padding:12px}.sidebar.open{display:block}.nav{grid-template-columns:repeat(2,1fr)}.nav button{font-size:13px;padding:9px}.mobile-menu{display:inline-block}.topbar{padding:14px}.content{padding:14px}.cards{grid-template-columns:repeat(2,1fr);gap:9px}.card{padding:13px}.metric{font-size:19px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.topbar h1{font-size:18px}}
-
-/* MY MONEY VISUAL REFINEMENT */
-:root{--green:#16745a;--green2:#e8f4ef;--blue:#2563b8;--blue2:#eaf1fc;--teal:#0d9488;--teal2:#e0f4f1;--ink:#18334a;--muted:#6a7b8e;--line:#e2eaf0;--white:#fff;--red:#c44747;--amber:#bb7a24;--shadow:0 8px 24px rgba(23,55,76,.07);}
-html{background:#f3f7f9}body{background:#f3f7f9;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:14px;line-height:1.55}
-.app{min-height:100vh}.sidebar{width:250px;background:linear-gradient(180deg,#123e3a 0%,#0f514b 100%);border-right:0;padding:25px 16px;color:#fff;box-shadow:4px 0 24px rgba(12,48,47,.08)}.brand{font-size:24px;color:#fff;letter-spacing:.8px;padding:8px 12px 28px}.brand small{color:#a8d5cb;font-size:10px;letter-spacing:1.6px;margin-top:4px}.nav{gap:7px}.nav button{color:#d3e7e3;padding:12px 13px;border-radius:11px;font-size:13px;transition:background .15s,color .15s}.nav button.active,.nav button:hover{background:#247f71;color:#fff}.sidebar-footer{margin-top:30px;border-top:1px solid #ffffff22;padding:15px 10px;color:#b5d6cf;line-height:1.7}
-.main{min-width:0}.topbar{padding:20px 30px;background:#fff;box-shadow:0 2px 10px #18334a08;position:sticky;top:0;z-index:5}.topbar h1{font-size:22px;font-weight:750;letter-spacing:-.4px;color:#163b4a}.period{border:1px solid #dbe5ed;border-radius:10px;padding:9px 11px;background:#fff;color:var(--ink)}.content{padding:27px 30px;max-width:1500px}.grid{gap:17px}.card{background:#fff;border:1px solid #e4ebf0;border-radius:17px;padding:20px;box-shadow:var(--shadow)}.cards{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.cards .card{position:relative;overflow:hidden;min-height:130px}.cards .card:before{content:"";position:absolute;top:0;left:0;width:4px;height:100%;background:var(--teal)}.cards .card:nth-child(1):before{background:var(--green)}.cards .card:nth-child(2):before{background:var(--blue)}.cards .card:nth-child(3):before{background:var(--teal)}.cards .card:nth-child(4):before{background:#56a6a2}.metric-label{font-size:12px;font-weight:650;color:#718294}.metric{font-size:26px;font-weight:800;color:#173c4d;letter-spacing:-.6px;margin:9px 0 4px}.metric-foot{font-size:12px;color:#7b8a9a}.section-grid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);margin-top:18px}.card h2,.card h3{font-size:16px;font-weight:750;color:#173c4d;margin-bottom:15px}.subtle{color:#718294}.bucket{border:1px solid #e4ebf0;border-radius:13px;padding:14px;background:#fcfdfd}.bucket-top{align-items:center}.bar{height:9px;background:#eaf0f4;border-radius:30px}.bar span{background:linear-gradient(90deg,#16845f,#0d9488)}.table-wrap{border:1px solid #e7edf2;border-radius:12px}.table{min-width:700px}.table th,.table td{padding:12px 13px;font-size:13px}.table th{background:#f4f8fa;color:#65788a;font-size:11px;text-transform:uppercase;letter-spacing:.5px}.table td{color:#334b5d}.empty{padding:30px;color:#8190a0}.form-grid{gap:14px}.field label{font-size:12px;font-weight:700;color:#50687b}.field input,.field select,.field textarea{border:1px solid #dbe5ed;border-radius:10px;padding:11px 12px;outline:none;transition:border .15s,box-shadow .15s}.field input:focus,.field select:focus,.field textarea:focus{border-color:#0d9488;box-shadow:0 0 0 3px #0d94881c}.field textarea{min-height:145px}.preview{background:#f0faf7;border:1px solid #c9e9df;border-radius:14px;padding:15px}.preview div{padding:5px 3px}.preview div strong{color:#1c4558}.actions{gap:9px}.status{border-radius:11px;font-weight:600}.status.ok{background:#e7f5ee;color:#16704c}.status.err{background:#fff0f0;color:#ad3d3d}.pill{font-weight:650}.modal-bg{backdrop-filter:blur(3px)}.modal{border:1px solid #e5edf2;box-shadow:0 20px 60px #102e4350;border-radius:20px;padding:24px}.login-card{margin:7vh auto;max-width:560px;padding:30px}.login-card .brand{color:var(--green);padding:0 0 14px}.login-card .brand small{color:var(--muted)}.login-card h2{font-size:24px;color:#173d4d}.login-card p{font-size:14px}.footer-note{line-height:1.6}.hidden{display:none!important}
-button{border-radius:10px;padding:10px 14px;font-size:13px;font-weight:700;transition:transform .12s,filter .12s,box-shadow .12s}button:hover{filter:brightness(.98);transform:translateY(-1px)}button.primary{background:#0d9488;color:#fff;box-shadow:0 3px 8px #0d948825}button.secondary{background:#eaf1fc;color:#2563b8}button.danger{background:#fff0f0;color:#bd4242}button.small{padding:7px 10px}.mobile-menu{display:none}
-@media(max-width:1050px){.sidebar{width:220px}.content{padding:22px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:700px){.app{display:block}.sidebar{width:auto;display:none;padding:14px}.sidebar.open{display:block}.nav{grid-template-columns:repeat(2,minmax(0,1fr))}.nav button{font-size:12px;padding:10px}.mobile-menu{display:inline-block}.topbar{padding:14px 16px}.content{padding:14px}.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{padding:14px}.metric{font-size:21px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.topbar h1{font-size:18px}.section-grid{grid-template-columns:1fr}}
-@media(max-width:430px){.cards{grid-template-columns:1fr}.top-actions{width:100%}.period{flex:1;min-width:0}}
-
+:root{
+  --green:#176b50;--green2:#e6f3ed;--blue:#2563b8;--blue2:#eaf1fc;
+  --teal:#0d9488;--teal2:#e1f3f1;--ink:#18364b;--muted:#728395;
+  --line:#e2eaf0;--white:#fff;--red:#c44747;--amber:#bb7a24;--orange:#d97706;
+  --shadow:0 7px 25px rgba(20,52,73,.07);
+}
+*{box-sizing:border-box}
+body{margin:0;background:#f3f7f9;color:var(--ink);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;border:0;border-radius:10px;padding:10px 14px;font-weight:700;transition:.15s}
+button:hover{filter:brightness(.97);transform:translateY(-1px)}
+button:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.primary{background:var(--teal);color:#fff}
+.secondary{background:var(--blue2);color:var(--blue)}
+.danger{background:#fff0f0;color:var(--red)}
+.warn-btn{background:#fff3df;color:var(--amber)}
+.small{padding:6px 10px;font-size:12px}
+.app{display:flex;min-height:100vh}
+.sidebar{width:256px;background:linear-gradient(165deg,#143f3b,#0d514a);color:#fff;flex:0 0 256px;padding:23px 15px;display:flex;flex-direction:column}
+.brand{font-size:23px;font-weight:850;letter-spacing:.7px;padding:8px 11px 24px;color:#fff}
+.brand small{display:block;font-size:10px;letter-spacing:1.6px;color:#a9d7cd;font-weight:600}
+.nav{display:grid;gap:5px}
+.nav button{text-align:left;color:#d3e6e1;background:transparent;padding:11px 13px;font-size:13px;border-radius:10px;display:flex;align-items:center;justify-content:space-between}
+.nav button:hover,.nav button.active{background:#247a6d;color:#fff}
+.nav-badge{background:#c44747;color:#fff;font-size:10px;padding:2px 7px;border-radius:99px;font-weight:800}
+.sidebar-foot{margin-top:auto;border-top:1px solid #ffffff26;padding:16px 10px 5px;color:#b7d7d0;font-size:12px;line-height:1.8}
+.main{flex:1;min-width:0}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#fff;border-bottom:1px solid var(--line);padding:18px 28px;position:sticky;top:0;z-index:5}
+.topbar h1{font-size:21px;margin:0;color:#183e4c}
+.top-actions{display:flex;align-items:center;gap:8px}
+.period{border:1px solid var(--line);border-radius:9px;padding:9px 11px;background:#fff;color:var(--ink)}
+.content{padding:25px 28px;max-width:1540px;margin:auto}
+.tab-panel{display:none}.tab-panel.active{display:block}
+.grid{display:grid;gap:16px}
+.cards{grid-template-columns:repeat(4,minmax(0,1fr))}
+.cards-5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.card{background:#fff;border:1px solid #e3ebf0;border-radius:16px;padding:19px;box-shadow:var(--shadow)}
+.metric-card{min-height:128px;position:relative;overflow:hidden}
+.metric-card:before{content:"";position:absolute;left:0;top:0;width:4px;height:100%;background:var(--teal)}
+.metric-card:nth-child(1):before{background:var(--green)}
+.metric-card:nth-child(2):before{background:var(--blue)}
+.metric-card:nth-child(3):before{background:var(--teal)}
+.metric-card:nth-child(4):before{background:#54aaa2}
+.metric-card:nth-child(5):before{background:var(--amber)}
+.metric-label{font-size:12px;color:var(--muted);font-weight:700}
+.metric{font-size:24px;font-weight:850;letter-spacing:-.5px;color:#193e4d;margin:7px 0}
+.metric-foot{font-size:12px;color:var(--muted)}
+.section-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);margin-top:17px}
+.section-grid-even{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:17px}
+.card h2,.card h3{font-size:16px;color:#183d4d;margin:0 0 14px;font-weight:800}
+.muted{color:var(--muted)}
+.table-wrap{overflow:auto;border:1px solid #e7edf2;border-radius:12px}
+.table{width:100%;border-collapse:collapse;min-width:650px}
+.table th,.table td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);white-space:nowrap;font-size:13px}
+.table th{background:#f5f8fa;color:#718294;font-size:11px;text-transform:uppercase;letter-spacing:.45px}
+.table td{color:#344e60}
+.empty{text-align:center;color:#8191a1;padding:25px}
+.field{display:grid;gap:6px}
+.field label{font-size:12px;font-weight:750;color:#52697c}
+.field input,.field select,.field textarea{width:100%;border:1px solid #dbe5ed;border-radius:10px;padding:10px 12px;background:white;color:var(--ink);outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px #0d94881b}
+.field textarea{min-height:130px;resize:vertical}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.form-grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.field.full{grid-column:1/-1}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}
+.preview{background:#f0faf7;border:1px solid #c9e9df;border-radius:14px;padding:14px;display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.preview div{padding:4px}.preview small{display:block;color:var(--muted);font-size:11px}.preview strong{color:#1b4558;overflow-wrap:anywhere}
+.status{display:none;padding:10px 12px;margin:12px 0;border-radius:10px;font-weight:650}
+.status.ok{display:block;background:#e7f5ee;color:#176a49}
+.status.err{display:block;background:#fff0f0;color:#a63d3d}
+.pill{display:inline-block;border-radius:99px;padding:4px 10px;font-size:11px;font-weight:750;background:var(--green2);color:var(--green)}
+.pill.warn{background:#fff3df;color:var(--amber)}
+.pill.orange{background:#ffedd5;color:#c2410c}
+.pill.bad{background:#ffeded;color:var(--red)}
+.pill.info{background:var(--blue2);color:var(--blue)}
+.bucket-list{display:grid;gap:12px}
+.bucket{border:1px solid var(--line);border-radius:12px;padding:13px}
+.bucket-top{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px}
+.bar{height:9px;border-radius:30px;background:#eaf0f4;overflow:hidden;margin-top:9px}
+.bar span{height:100%;display:block;background:linear-gradient(90deg,#176b50,#0d9488);border-radius:30px;transition:width .3s}
+.inline-note{font-size:12px;color:var(--muted);margin-top:5px}
+.modal-bg{position:fixed;inset:0;background:#0e253b88;backdrop-filter:blur(3px);z-index:30;display:none;align-items:center;justify-content:center;padding:16px}
+.modal{background:#fff;border-radius:18px;padding:22px;max-width:680px;width:100%;max-height:90vh;overflow:auto;box-shadow:0 20px 60px #102e4350}
+.modal h2{margin-top:0}
+.hidden{display:none!important}
+.mobile-menu{display:none}
+.mini-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 16px}
+.mini-card{padding:14px;border-radius:13px;background:#edf5f4}
+.mini-card b{display:block;font-size:17px;margin-top:5px}
+.checkline{display:flex;align-items:center;gap:8px;font-size:13px;color:#4f6678}.checkline input{width:auto}
+.subtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.subtab-btn{background:#fff;border:1px solid var(--line);color:var(--ink);padding:8px 14px;border-radius:10px;font-size:13px}
+.subtab-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+.subpanel{display:none}.subpanel.active{display:block}
+.alert-strip{display:grid;gap:8px;margin-bottom:16px}
+.alert-box{padding:11px 14px;border-radius:12px;font-size:13px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:600}
+.alert-box.red{background:#fff0f0;border:1px solid #f7caca;color:#991b1b}
+.alert-box.orange{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412}
+.alert-box.amber{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.toolbar input,.toolbar select{border:1px solid #dbe5ed;border-radius:9px;padding:8px 11px;font-size:13px;background:#fff}
+.pagination{display:flex;align-items:center;justify-content:space-between;margin-top:12px;font-size:12px;color:var(--muted)}
+.chart-box{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.donut{width:140px;height:140px;border-radius:50%;position:relative;flex:0 0 140px}
+.donut::after{content:"";position:absolute;inset:28px;background:#fff;border-radius:50%}
+.legend{display:grid;gap:6px;flex:1;min-width:180px;font-size:12px}
+.legend-item{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.dot{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:6px}
+.trend-bars{display:flex;align-items:flex-end;gap:12px;height:150px;padding-top:20px}
+.trend-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.trend-bar{width:100%;max-width:42px;background:linear-gradient(180deg,#0d9488,#176b50);border-radius:8px 8px 0 0;min-height:4px;transition:.3s}
+.trend-val{font-size:10px;font-weight:700;color:var(--muted)}
+.trend-lbl{font-size:11px;font-weight:700;color:var(--ink)}
+.toast{position:fixed;bottom:20px;right:20px;background:#143f3b;color:#fff;padding:12px 18px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.2);z-index:50;font-weight:650;display:none}
+@media(max-width:1100px){.cards,.cards-5{grid-template-columns:repeat(2,minmax(0,1fr))}.section-grid,.section-grid-even{grid-template-columns:1fr}.sidebar{width:225px;flex-basis:225px}}
+@media(max-width:720px){.app{display:block}.sidebar{display:none;width:auto;flex-basis:auto}.sidebar.open{display:block}.nav{grid-template-columns:repeat(2,1fr)}.nav button{font-size:12px;padding:9px}.mobile-menu{display:inline-block}.topbar{padding:13px}.topbar h1{font-size:18px}.content{padding:13px}.cards,.cards-5{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.card{padding:13px}.metric{font-size:19px}.form-grid,.form-grid-3{grid-template-columns:1fr}.field.full{grid-column:auto}.mini-cards{grid-template-columns:1fr 1fr}}
+@media(max-width:430px){.cards,.cards-5{grid-template-columns:1fr}.top-actions{width:100%}.period{flex:1}}
 </style>
 </head>
 <body>
-<div id="loginView" class="content hidden"><div class="card login-card"><div class="brand">MY MONEY <small>PERSONAL FINANCE MANAGER</small></div><h2>Connect to your private finance sheet</h2><p class="subtle">Enter your Apps Script web app URL and access key. The access key is stored only in this browser.</p><div class="field"><label>Apps Script Web App URL</label><input id="apiUrl" placeholder="https://script.google.com/macros/s/.../exec"></div><div class="field"><label>Personal access key</label><input id="apiKey" type="password" placeholder="Access key configured in Apps Script"></div><button class="primary" id="connectBtn">Connect</button><div id="loginStatus" class="status"></div><p class="footer-note">This static website is not itself private. Access to the Google Sheet is protected by the script's access key. Keep the key private and use a private GitHub repository if desired.</p></div></div>
+
+<div id="loginView" class="content hidden">
+  <div class="card" style="max-width:540px;margin:8vh auto;padding:30px">
+    <div class="brand" style="color:var(--green);padding:0">MY MONEY<small style="color:var(--muted)">PERSONAL & HOUSEHOLD FINANCE</small></div>
+    <h2>Connect your finance sheet</h2>
+    <p class="muted">Paste your Google Apps Script Web App URL and private access key. They are saved in your Google Sheet's <b>Settings</b> tab for seamless cross-platform access.</p>
+    <div class="field"><label>Apps Script Web App URL</label><input id="apiUrl" placeholder="https://script.google.com/macros/s/.../exec"></div>
+    <div class="field" style="margin-top:12px"><label>Private access key</label><input id="apiKey" type="password"></div>
+    <button class="primary" id="connectBtn" style="margin-top:14px">Connect & Sync with Google Sheets</button>
+    <div id="loginStatus" class="status"></div>
+  </div>
+</div>
+
 <div id="appView" class="app hidden">
-<aside class="sidebar" id="sidebar"><div class="brand">MY MONEY<small>PERSONAL FINANCE</small></div><nav class="nav"><button class="active" data-tab="dashboard">▦ Dashboard</button><button data-tab="mpesa">▣ M-Pesa entry</button><button data-tab="transactions">☷ Transactions</button><button data-tab="budget">◉ Budget standards</button><button data-tab="bills">▤ Recurring bills</button><button data-tab="goals">◇ Savings & goals</button><button data-tab="reports">▥ Reports</button><button data-tab="settings">⚙ Settings</button></nav><div class="sidebar-footer">Private personal ledger<br>Google Sheets connected</div></aside>
-<main class="main"><header class="topbar"><div style="display:flex;gap:10px;align-items:center"><button class="secondary mobile-menu" id="menuBtn">☰</button><h1 id="pageTitle">Dashboard</h1></div><div class="top-actions"><input class="period" id="period" type="month"><button class="secondary" id="refreshBtn">↻ Refresh</button></div></header><div class="content">
-<section class="tab-panel active" id="dashboard"><div class="grid cards"><div class="card"><div class="metric-label">Income this month</div><div class="metric" id="incomeMetric">KES 0</div><div class="metric-foot">Income recorded</div></div><div class="card"><div class="metric-label">Expenses</div><div class="metric" id="expenseMetric">KES 0</div><div class="metric-foot">Including settled recurring bills</div></div><div class="card"><div class="metric-label">Saved / invested</div><div class="metric" id="savingMetric">KES 0</div><div class="metric-foot">Saving transactions</div></div><div class="card"><div class="metric-label">Remaining from income</div><div class="metric" id="balanceMetric">KES 0</div><div class="metric-foot">Income minus expenses and savings</div></div></div>
-<div class="grid section-grid"><div class="card"><h2>Budget allocation & usage</h2><div id="budgetBars" class="bucket-list"><div class="empty">Connect and load your data.</div></div></div><div class="card"><h2>Monthly bill status</h2><div id="billSummary" class="bucket-list"><div class="empty">No bill data yet.</div></div></div></div><div class="card" style="margin-top:16px"><h2>Recent transactions</h2><div class="table-wrap"><table class="table"><thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Type</th><th>Amount</th></tr></thead><tbody id="recentRows"></tbody></table></div></div></section>
-<section class="tab-panel" id="mpesa"><div class="grid section-grid"><div class="card"><h2>Paste M-Pesa confirmation</h2><p class="subtle">Paste the full SMS. Details will be extracted locally in your browser before saving.</p><div class="field"><label>M-Pesa message</label><textarea id="mpesaText" placeholder="Paste the complete M-Pesa SMS here..."></textarea></div><div class="actions"><button class="primary" id="parseBtn">Extract transaction</button><button class="secondary" id="clearMpesa">Clear</button></div><div id="parseStatus" class="status"></div></div><div class="card"><h2>Extracted transaction</h2><div id="mpesaPreview" class="preview hidden"><div><small>Transaction code</small><strong id="pCode">—</strong></div><div><small>Amount</small><strong id="pAmount">—</strong></div><div><small>Paid to / from</small><strong id="pRecipient">—</strong></div><div><small>Date & time</small><strong id="pDate">—</strong></div><div><small>Type</small><strong id="pType">—</strong></div><div><small>Category required</small><strong>Choose below</strong></div></div><form id="mpesaForm"><div class="field" style="margin-top:14px"><label>Transaction category *</label><select id="mpesaCategory" required><option value="">Select category after extraction</option></select></div><div class="field" style="margin-top:12px"><label>Bucket</label><input id="mpesaBucket" readonly placeholder="Auto-filled from category"></div><div class="field" style="margin-top:12px"><label>Optional note</label><input id="mpesaNote" placeholder="Add a note"></div><button class="primary" id="submitMpesa" style="margin-top:14px" disabled>Submit transaction</button></form></div></div></section>
-<section class="tab-panel" id="transactions"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><h2>Transaction history</h2><button class="primary" id="manualAdd">+ Add transaction</button></div><div class="table-wrap"><table class="table"><thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Bucket</th><th>Type</th><th>Amount</th><th>Code</th></tr></thead><tbody id="transactionRows"></tbody></table></div></div></section>
-<section class="tab-panel" id="budget"><div class="card"><h2>Budget standards</h2><p class="subtle">Set monthly standard amounts for each category. Budget bucket percentages are managed under Settings.</p><div class="table-wrap"><table class="table"><thead><tr><th>Category</th><th>Bucket</th><th>Monthly standard (KES)</th><th>Actual this month</th><th>Variance</th><th></th></tr></thead><tbody id="standardsRows"></tbody></table></div><div class="actions"><button class="primary" id="saveStandards">Save standards</button><button class="secondary" id="addStandard">+ Add category standard</button></div></div></section>
-<section class="tab-panel" id="bills"><div class="card"><h2>Recurring bills</h2><p class="subtle">Bills are copied into the selected month automatically. A qualifying submitted transaction in that month settles the matching bill.</p><div class="table-wrap"><table class="table"><thead><tr><th>Bill</th><th>Category</th><th>Bucket</th><th>Amount</th><th>Day due</th><th>Active</th></tr></thead><tbody id="recurringRows"></tbody></table></div><button class="primary" id="addBill" style="margin-top:14px">+ Add recurring bill</button><h2 style="margin-top:24px">Bills for selected month</h2><div class="table-wrap"><table class="table"><thead><tr><th>Bill</th><th>Due date</th><th>Amount</th><th>Status</th><th>Paid transaction</th></tr></thead><tbody id="monthlyBillRows"></tbody></table></div></div></section>
-<section class="tab-panel" id="goals"><div class="card"><h2>Savings & investment goals</h2><div class="table-wrap"><table class="table"><thead><tr><th>Goal</th><th>Target</th><th>Current progress</th><th>Target date</th><th>Progress</th></tr></thead><tbody id="goalRows"></tbody></table></div><button class="primary" id="addGoal" style="margin-top:14px">+ Add goal</button></div></section>
-<section class="tab-panel" id="reports"><div class="grid section-grid"><div class="card"><h2>Selected month summary</h2><div id="reportSummary"></div></div><div class="card"><h2>Expenses by category</h2><div id="categoryReport"></div></div></div></section>
-<section class="tab-panel" id="settings"><div class="grid section-grid"><div class="card"><h2>Budget bucket allocations</h2><div class="table-wrap"><table class="table"><thead><tr><th>Bucket</th><th>Percent</th><th>Includes</th><th></th></tr></thead><tbody id="bucketRows"></tbody></table></div><button class="primary" id="addBucket" style="margin-top:14px">+ Add bucket</button><button class="primary" id="saveBuckets" style="margin-top:14px;margin-left:8px">Save allocation</button></div><div class="card"><h2>Connection</h2><p class="subtle">Update Apps Script URL or your private key on this device.</p><div class="field"><label>Web App URL</label><input id="settingsUrl"></div><div class="field" style="margin-top:10px"><label>Access key</label><input id="settingsKey" type="password"></div><div class="actions"><button class="primary" id="saveConnection">Save connection</button><button class="danger" id="disconnect">Disconnect</button></div><div class="footer-note">Application data is stored in your Google Sheet. This browser stores your connection key locally.</div></div></div></section>
-</div></main></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">MY MONEY<small>FINANCE & HOUSEHOLD</small></div>
+    <nav class="nav">
+      <button class="active" data-tab="dashboard"><span>▦ Dashboard</span></button>
+      <button data-tab="household"><span>⌂ Household Mgmt</span><span id="hhAlertBadge" class="nav-badge hidden">0</span></button>
+      <button data-tab="income"><span>＋ Income Manager</span></button>
+      <button data-tab="mpesa"><span>▣ M-Pesa Paste</span></button>
+      <button data-tab="transactions"><span>☷ Transactions</span></button>
+      <button data-tab="budget"><span>◉ Budget Standards</span></button>
+      <button data-tab="bills"><span>▤ All Bills</span></button>
+      <button data-tab="unplanned"><span>⚑ Unplanned</span></button>
+      <button data-tab="goals"><span>◇ Savings & Goals</span></button>
+      <button data-tab="reports"><span>▥ Reports</span></button>
+      <button data-tab="settings"><span>⚙ Settings</span></button>
+    </nav>
+    <div class="sidebar-foot">Synchronized Finance & Household Ledger<br>Connected to Google Sheets</div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div style="display:flex;gap:10px;align-items:center">
+        <button class="secondary mobile-menu" id="menuBtn">☰</button>
+        <h1 id="pageTitle">Dashboard</h1>
+      </div>
+      <div class="top-actions">
+        <input class="period" id="period" type="month">
+        <button class="secondary" id="refreshBtn">↻ Sync</button>
+      </div>
+    </header>
+
+    <div class="content">
+      <!-- ==================== 1. MAIN DASHBOARD ==================== -->
+      <section class="tab-panel active" id="dashboard">
+        <div class="grid cards">
+          <div class="card metric-card"><div class="metric-label">Income this month</div><div class="metric" id="incomeMetric">KES 0</div><div class="metric-foot">All recorded income sources</div></div>
+          <div class="card metric-card"><div class="metric-label">Expenses this month</div><div class="metric" id="expenseMetric">KES 0</div><div class="metric-foot">Includes household & general spend</div></div>
+          <div class="card metric-card"><div class="metric-label">Savings & investments</div><div class="metric" id="savingMetric">KES 0</div><div class="metric-foot">Contributions recorded</div></div>
+          <div class="card metric-card"><div class="metric-label">Available after bills</div><div class="metric" id="balanceMetric">KES 0</div><div class="metric-foot">After paid items & outstanding bills</div></div>
+        </div>
+        <div class="grid section-grid">
+          <div class="card"><h2>Budget allocations & actuals</h2><div id="budgetBars" class="bucket-list"><div class="empty">Connect and load your data.</div></div></div>
+          <div class="card">
+            <h2>Financial position</h2><div id="financialPosition"></div>
+            <hr style="border:0;border-top:1px solid var(--line);margin:15px 0">
+            <h2>Household & Bill Snapshot</h2><div id="billSummary"></div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <h2>Recent activity</h2>
+          <div class="table-wrap"><table class="table"><thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Type</th><th>Amount</th></tr></thead><tbody id="recentRows"></tbody></table></div>
+        </div>
+      </section>
+
+      <!-- ==================== 2. HOUSEHOLD MANAGEMENT MODULE ==================== -->
+      <section class="tab-panel" id="household">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px">
+          <div class="subtabs" style="margin:0;border:0;padding:0">
+            <button class="subtab-btn active" data-hhsub="hh-dash">Overview & Charts</button>
+            <button class="subtab-btn" data-hhsub="hh-items">Consumables & Inventory</button>
+            <button class="subtab-btn" data-hhsub="hh-bills">Household Bills</button>
+            <button class="subtab-btn" data-hhsub="hh-budgets">Household Budgets</button>
+            <button class="subtab-btn" data-hhsub="hh-replenish">Replenishment List</button>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="primary small" id="hhQuickAddItem">＋ Quick Add Item</button>
+            <button class="secondary small" id="hhQuickAddBill">＋ Quick Record Bill</button>
+            <button class="warn-btn small" id="hhQuickMpesa">▣ Record M-Pesa Payment</button>
+          </div>
+        </div>
+
+        <div id="hhAlertsContainer" class="alert-strip"></div>
+
+        <!-- HH Sub-tab 1: Overview & Visual Charts -->
+        <div class="subpanel active" id="hh-dash">
+          <div class="grid cards-5">
+            <div class="card metric-card"><div class="metric-label">Household Spend (Month)</div><div class="metric" id="hhTotalSpend">KES 0</div><div class="metric-foot" id="hhEstNextMonth">Est. next month: KES 0</div></div>
+            <div class="card metric-card"><div class="metric-label">Groceries & Shopping</div><div class="metric" id="hhGrocerySpend">KES 0</div><div class="metric-foot">Food, shopping, cleaning, toiletries</div></div>
+            <div class="card metric-card"><div class="metric-label">Utility Bills (Total / Paid)</div><div class="metric" id="hhUtilitySpend">KES 0</div><div class="metric-foot" id="hhBillsPaidFoot">Paid: KES 0</div></div>
+            <div class="card metric-card"><div class="metric-label">Outstanding Bills</div><div class="metric" id="hhOutstandingBills">KES 0</div><div class="metric-foot" id="hhUpcomingBillsCount">0 upcoming bills</div></div>
+            <div class="card metric-card"><div class="metric-label">Inventory Attention</div><div class="metric" id="hhStockAttention">0 items</div><div class="metric-foot" id="hhStockBreakdown">0 low · 0 due · 0 out</div></div>
+          </div>
+
+          <div class="grid section-grid-even">
+            <div class="card">
+              <h2>Household Expenditure by Category</h2>
+              <div id="hhCategoryChart" class="chart-box"></div>
+            </div>
+            <div class="card">
+              <h2>Monthly Household Spending Trend (6 Months)</h2>
+              <div id="hhTrendChart"></div>
+            </div>
+          </div>
+
+          <div class="grid section-grid-even">
+            <div class="card">
+              <h2>Paid vs. Unpaid Household Bills</h2>
+              <div id="hhBillsChart"></div>
+            </div>
+            <div class="card">
+              <h2>Depletion & Replenishment Forecast (Next 14 Days)</h2>
+              <div id="hhForecastList" class="bucket-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HH Sub-tab 2: Consumables & Inventory -->
+        <div class="subpanel" id="hh-items">
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+              <h2 style="margin:0">Household Items & Consumables Inventory</h2>
+              <button class="primary small" id="hhAddItemBtn">＋ Register Item</button>
+            </div>
+            <div class="toolbar">
+              <input id="hhItemSearch" placeholder="Search item, supplier, notes...">
+              <select id="hhItemCatFilter"><option value="">All Categories</option></select>
+              <select id="hhItemStatusFilter">
+                <option value="">All Statuses</option>
+                <option value="Available">Available</option>
+                <option value="Running Low">Running Low</option>
+                <option value="Due for Replenishment">Due for Replenishment</option>
+                <option value="Out of Stock">Out of Stock</option>
+              </select>
+              <select id="hhItemSort">
+                <option value="depletion">Sort: Soonest Depletion</option>
+                <option value="purchase">Sort: Latest Purchased</option>
+                <option value="cost">Sort: Highest Cost</option>
+                <option value="name">Sort: Name (A-Z)</option>
+              </select>
+            </div>
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Item & Category</th>
+                    <th>Purchased</th>
+                    <th>Cost (Total / Unit)</th>
+                    <th>Current Stock</th>
+                    <th>Daily Rate</th>
+                    <th>Duration & End Date</th>
+                    <th>Days Left</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="hhItemsRows"></tbody>
+              </table>
+            </div>
+            <div class="pagination" id="hhItemsPagination"></div>
+          </div>
+        </div>
+
+        <!-- HH Sub-tab 3: Household Bills Management -->
+        <div class="subpanel" id="hh-bills">
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+              <h2 style="margin:0">Recurring & Utility Household Bills</h2>
+              <button class="primary small" id="hhAddBillBtn">＋ Add Household Bill</button>
+            </div>
+            <div class="toolbar">
+              <input id="hhBillSearch" placeholder="Search bill, provider, meter/account...">
+              <select id="hhBillStatusFilter">
+                <option value="">All Statuses</option>
+                <option value="Paid">Paid</option>
+                <option value="Partially Paid">Partially Paid</option>
+                <option value="Unpaid">Unpaid</option>
+                <option value="Overdue">Overdue</option>
+              </select>
+            </div>
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Bill & Category</th>
+                    <th>Provider / Meter #</th>
+                    <th>Frequency</th>
+                    <th>Expected</th>
+                    <th>Paid</th>
+                    <th>Balance</th>
+                    <th>Due Date</th>
+                    <th>Next Cycle</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="hhBillsRows"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- HH Sub-tab 4: Household Budgets & Spending Controls -->
+        <div class="subpanel" id="hh-budgets">
+          <div class="card">
+            <h2>Monthly Household Budget Controls & Month-End Projections</h2>
+            <p class="muted">Set monthly spending limits for core household categories. Automatic alerts trigger at 80% and 100% consumption.</p>
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Household Budget Category</th>
+                    <th>Monthly Budget (KES)</th>
+                    <th>Actual Spent</th>
+                    <th>Remaining</th>
+                    <th>% Consumed</th>
+                    <th>Projected Month-End</th>
+                    <th>Alert Status</th>
+                  </tr>
+                </thead>
+                <tbody id="hhBudgetRows"></tbody>
+              </table>
+            </div>
+            <div class="actions">
+              <button class="primary" id="saveHhBudgetsBtn">Save Household Budgets</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- HH Sub-tab 5: Smart Replenishment List -->
+        <div class="subpanel" id="hh-replenish">
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+              <div>
+                <h2 style="margin:0">Shopping & Replenishment List</h2>
+                <p class="muted" style="margin:4px 0 0">Automatically generated from items Running Low, Due for Replenishment, or Out of Stock.</p>
+              </div>
+              <div style="font-weight:800;font-size:15px;color:var(--teal)" id="hhReplenishTotal">Est. Restock Cost: KES 0</div>
+            </div>
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Item Name</th>
+                    <th>Category</th>
+                    <th>Current Stock</th>
+                    <th>Min Threshold</th>
+                    <th>Est. Depletion Date</th>
+                    <th>Last Unit Cost</th>
+                    <th>Suggested Qty</th>
+                    <th>Est. Cost</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="hhReplenishRows"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 3. INCOME MANAGER TAB ==================== -->
+      <section class="tab-panel" id="income">
+        <div class="grid cards" style="margin-bottom:16px">
+          <div class="card metric-card"><div class="metric-label">Selected Month Income</div><div class="metric" id="incTabMonth">KES 0</div><div class="metric-foot" id="incTabCount">0 entries this month</div></div>
+          <div class="card metric-card"><div class="metric-label">Year-to-Date Income</div><div class="metric" id="incTabYtd">KES 0</div><div class="metric-foot">Cumulative recorded income</div></div>
+          <div class="card metric-card"><div class="metric-label">Household Spend Ratio</div><div class="metric" id="incHhRatio">0%</div><div class="metric-foot">Of this month's income</div></div>
+          <div class="card metric-card"><div class="metric-label">Net Cash Remaining</div><div class="metric" id="incTabNet">KES 0</div><div class="metric-foot">Synchronized with Dashboard</div></div>
+        </div>
+
+        <div class="grid section-grid">
+          <div class="card">
+            <h2>Record New Income</h2>
+            <p class="muted">Record salary, business revenue, dividends, refunds, or side income. Automatically updates dashboard balances and budget ratios.</p>
+            <form id="incomeForm">
+              <div class="form-grid">
+                <div class="field"><label>Date *</label><input type="date" id="incomeDate" required></div>
+                <div class="field"><label>Amount (KES) *</label><input type="number" id="incomeAmount" min="0.01" step=".01" required></div>
+                <div class="field"><label>Income Source *</label><select id="incomeSource" required></select></div>
+                <div class="field"><label>Category *</label><select id="incomeCategory" required><option>Salary</option><option>Business income</option><option>Investment returns</option><option>Refund / Reimbursement</option><option>Other income</option></select></div>
+                <div class="field"><label>Payment Method</label><select id="incomeMethod"><option>Bank Transfer</option><option>M-Pesa</option><option>Cash</option><option>Cheque</option></select></div>
+                <div class="field"><label>Notes (optional)</label><input id="incomeNote" placeholder="e.g. Net pay after deductions"></div>
+                <div class="field full"><label>Description *</label><input id="incomeDescription" required placeholder="e.g. November Monthly Salary"></div>
+              </div>
+              <div class="actions">
+                <button class="primary" id="saveIncome">Save Income Entry</button>
+                <button type="button" class="secondary" id="addIncomeSource">+ Manage Income Sources</button>
+              </div>
+              <div id="incomeStatus" class="status"></div>
+            </form>
+          </div>
+
+          <div class="card">
+            <h2>Income Breakdown by Source (Selected Month)</h2>
+            <div id="incomeSourceBreakdown" class="bucket-list"></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <h2>Recorded Income Ledger</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th>Date</th><th>Source</th><th>Category</th><th>Description</th><th>Method</th><th>Amount</th></tr></thead>
+              <tbody id="incomeLedgerRows"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 4. M-PESA PASTE & HOUSEHOLD RECONCILIATION ==================== -->
+      <section class="tab-panel" id="mpesa">
+        <div class="grid section-grid">
+          <div class="card">
+            <h2>Paste M-Pesa Confirmation</h2>
+            <p class="muted">Paste the complete SMS. Extract details automatically and link directly to a Household Bill, Household Item, or General Category without duplicate entries.</p>
+            <div class="field"><label>M-Pesa SMS</label><textarea id="mpesaText" placeholder="Paste M-Pesa confirmation SMS here..."></textarea></div>
+            <div class="actions"><button class="primary" id="parseBtn">Extract Transaction</button><button class="secondary" id="clearMpesa">Clear</button></div>
+            <div id="parseStatus" class="status"></div>
+          </div>
+
+          <div class="card">
+            <h2>Transaction Preview & Allocation</h2>
+            <div id="mpesaPreview" class="preview hidden">
+              <div><small>Transaction code</small><strong id="pCode">—</strong></div>
+              <div><small>Amount</small><strong id="pAmount">—</strong></div>
+              <div><small>Recipient / sender</small><strong id="pRecipient">—</strong></div>
+              <div><small>Date & time</small><strong id="pDate">—</strong></div>
+              <div><small>Type</small><strong id="pType">—</strong></div>
+              <div><small>Status</small><strong>Ready to allocate</strong></div>
+            </div>
+
+            <form id="mpesaForm">
+              <div class="form-grid" style="margin-top:14px">
+                <div class="field"><label>Transaction Type</label><select id="mpesaType"><option value="expense">Expense</option><option value="income">Income</option><option value="saving">Savings contribution</option><option value="investment">Investment contribution</option></select></div>
+                <div class="field"><label>Main Ledger Category *</label><select id="mpesaCategory" required></select></div>
+              </div>
+
+              <div class="bucket" style="margin-top:12px;background:#f7fbfa">
+                <strong style="font-size:13px;color:var(--teal)">⌂ Household Management Allocation (Optional)</strong>
+                <div class="form-grid" style="margin-top:8px">
+                  <div class="field">
+                    <label>Household Category</label>
+                    <select id="mpesaHhCategory"><option value="">Not a household expense</option></select>
+                  </div>
+                  <div class="field">
+                    <label>Link Household Bill (Auto-Settle)</label>
+                    <select id="mpesaHhBill"><option value="">None</option></select>
+                  </div>
+                  <div class="field">
+                    <label>Link Household Item (Update Cost/Restock)</label>
+                    <select id="mpesaHhItem"><option value="">None</option></select>
+                  </div>
+                  <div class="field">
+                    <label>Restock Quantity (if item selected)</label>
+                    <input id="mpesaHhQty" type="number" min="0" step="0.01" placeholder="e.g. 5">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-grid" style="margin-top:10px">
+                <div class="field"><label>Income Source (if income)</label><select id="mpesaIncomeSource"></select></div>
+                <div class="field"><label>Budget Bucket</label><input id="mpesaBucket" readonly placeholder="Set from category"></div>
+                <div class="field"><label>Linked Savings Goal</label><select id="mpesaGoal"><option value="">No goal linked</option></select></div>
+                <div class="field"><label>Note</label><input id="mpesaNote" placeholder="Optional note"></div>
+              </div>
+              <button class="primary" id="submitMpesa" style="margin-top:14px" disabled>Save & Synchronize Transaction</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 5. ALL TRANSACTIONS ==================== -->
+      <section class="tab-panel" id="transactions">
+        <div class="card">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+            <h2 style="margin:0">All Transactions (Unified Ledger)</h2>
+            <button class="primary" id="manualAdd">＋ Record Transaction</button>
+          </div>
+          <div class="toolbar">
+            <input id="txSearch" placeholder="Search description, M-Pesa code, category...">
+            <select id="txTypeFilter"><option value="">All Types</option><option value="expense">Expense</option><option value="income">Income</option><option value="saving">Saving</option><option value="investment">Investment</option></select>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Household Tag</th><th>Bucket</th><th>Type</th><th>Source / Method</th><th>Amount</th><th>Unplanned</th></tr></thead>
+              <tbody id="transactionRows"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 6. BUDGET STANDARDS ==================== -->
+      <section class="tab-panel" id="budget">
+        <div class="card">
+          <h2>Budget Standards</h2>
+          <p class="muted">Edit planned monthly amounts. Actuals are recalculated from all recorded transactions including household purchases.</p>
+          <div class="table-wrap"><table class="table"><thead><tr><th>Category</th><th>Bucket</th><th>Monthly standard</th><th>Actual</th><th>Remaining / variance</th><th></th></tr></thead><tbody id="standardsRows"></tbody></table></div>
+          <div class="actions"><button class="primary" id="saveStandards">Save standards</button><button class="secondary" id="addStandard">＋ Add category</button></div>
+        </div>
+      </section>
+
+      <!-- ==================== 7. ALL BILLS ==================== -->
+      <section class="tab-panel" id="bills">
+        <div class="card">
+          <h2>All Bills — Selected Month</h2>
+          <p class="muted">Manual and recurring bills are shown here. Payments automatically allocate against matching outstanding bills.</p>
+          <div class="mini-cards" style="grid-template-columns:repeat(3,1fr)"><div class="mini-card">Total billed<b id="billTotal">KES 0</b></div><div class="mini-card">Total paid<b id="billPaid">KES 0</b></div><div class="mini-card">Outstanding<b id="billOutstanding">KES 0</b></div></div>
+          <div class="table-wrap"><table class="table"><thead><tr><th>Bill</th><th>Type</th><th>Category</th><th>Due date</th><th>Bill amount</th><th>Paid</th><th>Balance</th><th>Status</th></tr></thead><tbody id="monthlyBillRows"></tbody></table></div>
+          <div class="actions"><button class="primary" id="addManualBill">＋ Add one-time bill</button><button class="secondary" id="importBills">⇧ Import bills CSV</button><input id="billCsvUpload" type="file" accept=".csv,text/csv" hidden><button class="secondary" id="addBill">＋ Add recurring bill</button><button class="secondary" id="reminderSetup">✉ Enable bill reminders</button></div>
+          <div id="billStatus" class="status"></div>
+          <h2 style="margin-top:25px">Recurring Bill Schedule</h2>
+          <div class="table-wrap"><table class="table"><thead><tr><th>Bill</th><th>Category</th><th>Amount</th><th>Due day</th><th>Active</th></tr></thead><tbody id="recurringRows"></tbody></table></div>
+        </div>
+      </section>
+
+      <!-- ==================== 8. UNPLANNED EXPENSES ==================== -->
+      <section class="tab-panel" id="unplanned">
+        <div class="card">
+          <h2>Unplanned Expenses</h2>
+          <p class="muted">Expenses marked as unplanned appear here and remain included in total expenditure.</p>
+          <div class="table-wrap"><table class="table"><thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Amount</th><th>Payment method</th></tr></thead><tbody id="unplannedRows"></tbody></table></div>
+          <button class="primary" id="addUnplanned" style="margin-top:13px">＋ Record unplanned expense</button>
+        </div>
+      </section>
+
+      <!-- ==================== 9. SAVINGS & GOALS ==================== -->
+      <section class="tab-panel" id="goals">
+        <div class="card">
+          <h2>Savings & Investment Goals</h2>
+          <p class="muted">Goal contributions are linked to transactions and automatically increase goal progress.</p>
+          <div class="table-wrap"><table class="table"><thead><tr><th>Goal</th><th>Type</th><th>Target</th><th>Current</th><th>Remaining</th><th>Target date</th><th>Progress</th></tr></thead><tbody id="goalRows"></tbody></table></div>
+          <div class="actions"><button class="primary" id="addGoal">＋ Create goal</button><button class="secondary" id="goalContribution">＋ Contribute to goal</button></div>
+        </div>
+      </section>
+
+      <!-- ==================== 10. REPORTS ==================== -->
+      <section class="tab-panel" id="reports">
+        <div class="grid section-grid">
+          <div class="card"><h2>Selected Month Financial Summary</h2><div id="reportSummary"></div></div>
+          <div class="card"><h2>Expenses by Category</h2><div id="categoryReport"></div></div>
+        </div>
+      </section>
+
+      <!-- ==================== 11. SETTINGS ==================== -->
+      <section class="tab-panel" id="settings">
+        <div class="grid section-grid">
+          <div class="card">
+            <h2>Budget Bucket Allocations</h2>
+            <div class="table-wrap"><table class="table"><thead><tr><th>Bucket</th><th>Allocation</th><th>Includes</th><th></th></tr></thead><tbody id="bucketRows"></tbody></table></div>
+            <div class="actions"><button class="primary" id="addBucket">＋ Add bucket</button><button class="secondary" id="saveBuckets">Save allocation</button></div>
+          </div>
+          <div class="card">
+            <h2>Income Sources</h2>
+            <div class="table-wrap"><table class="table"><thead><tr><th>Source</th><th>Active</th></tr></thead><tbody id="incomeSourceRows"></tbody></table></div>
+            <button class="secondary" id="manageSources" style="margin-top:12px">＋ Add income source</button>
+          </div>
+          <div class="card">
+            <h2>Connection Settings (Synced with Google Sheet)</h2>
+            <p class="muted" style="font-size:12px">Stored in your Google Sheet's <b>Settings</b> tab. Copy the Magic Sync Link to auto-connect on any phone or other browser without re-entering keys.</p>
+            <div class="field"><label>Apps Script URL</label><input id="settingsUrl"></div>
+            <div class="field" style="margin-top:10px"><label>Access Key</label><input id="settingsKey" type="password"></div>
+            <div class="field" style="margin-top:10px"><label>Cross-Device Magic Sync Link</label><input id="magicSyncLink" readonly style="background:#f5f8fa;font-size:12px"></div>
+            <div class="actions">
+              <button class="primary" id="saveConnection">Save to Sheet & Sync</button>
+              <button class="secondary" id="copyMagicLink">Copy Sync Link</button>
+              <button class="danger" id="disconnect">Disconnect</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
 <div class="modal-bg" id="modalBg"><div class="modal" id="modal"></div></div>
+<div class="toast" id="toast"></div>
+
 <script>
-const $=id=>document.getElementById(id);const money=n=>'KES '+Number(n||0).toLocaleString('en-KE',{minimumFractionDigits:2,maximumFractionDigits:2});let state={transactions:[],standards:[],buckets:[],recurringBills:[],monthlyBills:[],goals:[],month:new Date().toISOString().slice(0,7),parsed:null};const categories=[];
-function getConn(){return {url:localStorage.getItem('myMoneyUrl')||'',key:localStorage.getItem('myMoneyKey')||''}}
-function showStatus(el,msg,ok=true){el.textContent=msg;el.className='status '+(ok?'ok':'err')}
-function hideStatus(el){el.className='status';el.textContent=''}
-async function api(action,data={}){let c=getConn();if(!c.url||!c.key)throw Error('Connection not configured.');const res=await fetch(c.url,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action,key:c.key,...data})});let text=await res.text();let json;try{json=JSON.parse(text)}catch{throw Error('Google Script did not return JSON. Confirm deployment URL and access settings.')}if(!json.ok)throw Error(json.error||'Request failed');return json.data}
-function setView(){const c=getConn();if(!c.url||!c.key){$('loginView').classList.remove('hidden');$('appView').classList.add('hidden')}else{$('loginView').classList.add('hidden');$('appView').classList.remove('hidden');$('settingsUrl').value=c.url;$('settingsKey').value=c.key}}
-function parseMpesa(s){s=(s||'').trim();if(!s)throw Error('Paste an M-Pesa message first.');let code=(s.match(/\b([A-Z0-9]{10})\s+Confirmed\b/i)||[])[1];let amount=(s.match(/(?:Ksh|KES)\s*([\d,]+(?:\.\d{1,2})?)/i)||[])[1];let recipient=(s.match(/(?:paid to|sent to|send money to|bought goods from|paybill to|paid account of|received from)\s+(.+?)(?:\s+on\s+\d{1,2}\/\d{1,2}\/\d{2,4}|\s+at\s+\d|\.|$)/i)||[])[1];let dateTime=(s.match(/\bon\s+(\d{1,2}\/\d{1,2}\/\d{2,4})\s+at\s+([0-9:]+\s*(?:AM|PM))/i)||[]);let date='',time='';if(dateTime.length){let p=dateTime[1].split('/');let year=p[2].length===2?'20'+p[2]:p[2];date=`${year}-${p[1].padStart(2,'0')}-${p[0].padStart(2,'0')}`;time=dateTime[2].toUpperCase()}if(!code||!amount||!recipient||!date)throw Error('Could not extract all expected fields. Ensure this is a completed M-Pesa payment confirmation.');return {code,amount:Number(amount.replace(/,/g,'')),recipient:recipient.trim().replace(/[.]$/,''),date,time,type:/received from|you have received|credited to your account/i.test(s)?'income':'expense',raw:s}}
-function refreshCategorySelect(){const options=state.standards.map(x=>`<option value="${esc(x.category)}">${esc(x.category)}</option>`).join('');$('mpesaCategory').innerHTML='<option value="">Select category</option>'+options}
-function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function bucketFor(category){return state.standards.find(x=>x.category===category)?.bucket||''}
-function monthTransactions(){return state.transactions.filter(t=>(t.date||'').slice(0,7)===state.month)}
-function sums(){let ts=monthTransactions();let income=ts.filter(t=>t.type==='income').reduce((a,t)=>a+Number(t.amount||0),0);let expenses=ts.filter(t=>t.type==='expense').reduce((a,t)=>a+Number(t.amount||0),0);let savings=ts.filter(t=>['saving','investment'].includes(t.type)).reduce((a,t)=>a+Number(t.amount||0),0);return {income,expenses,savings,balance:income-expenses-savings}}
-function render(){let s=sums();$('incomeMetric').textContent=money(s.income);$('expenseMetric').textContent=money(s.expenses);$('savingMetric').textContent=money(s.savings);$('balanceMetric').textContent=money(s.balance);renderBudgets();renderBills();renderTransactions();renderStandards();renderRecurring();renderMonthlyBills();renderGoals();renderReports();renderBuckets();refreshCategorySelect()}
-function renderBudgets(){let ts=monthTransactions().filter(t=>t.type==='expense');let list=state.buckets.map(b=>{let budget=s.income*Number(b.percent||0)/100;let actual=ts.filter(t=>t.bucket===b.bucket).reduce((a,t)=>a+Number(t.amount||0),0);let pct=budget?actual/budget*100:0;return `<div class="bucket"><div class="bucket-top"><span class="bucket-title">${esc(b.bucket)} <span class="subtle">${Number(b.percent)}%</span></span><strong>${money(actual)} / ${money(budget)}</strong></div><div class="bar" style="margin-top:9px"><span style="width:${Math.min(100,pct)}%;background:${pct>100?'#c44848':pct>=80?'#c07a22':'#0c9488'}"></span></div><div class="inline-note">${pct.toFixed(0)}% utilized${pct>100?' • Over allocation':''}</div></div>`}).join('');$('budgetBars').innerHTML=list||'<div class="empty">Create budget buckets in Settings.</div>'}
-function renderBills(){let bs=state.monthlyBills.filter(b=>b.month===state.month);let paid=bs.filter(b=>b.status==='Settled').length;$('billSummary').innerHTML=bs.length?`<div class="bucket"><strong>${paid} of ${bs.length} bills settled</strong><div class="bar" style="margin-top:9px"><span style="width:${bs.length?paid/bs.length*100:0}%"></span></div><div class="inline-note">${bs.length-paid} pending in ${state.month}</div></div>`:'<div class="empty">No bills generated for this month. Recurring bills will be created when data is loaded.</div>'}
-function renderTransactions(){let ts=monthTransactions().slice().sort((a,b)=>(b.date||'').localeCompare(a.date||''));let html=ts.slice(0,10).map(t=>`<tr><td>${esc(t.date)}</td><td>${esc(t.description)}</td><td>${esc(t.category)}</td><td>${esc(t.type)}</td><td>${money(t.amount)}</td></tr>`).join('');$('recentRows').innerHTML=html||'<tr><td colspan="5" class="empty">No transactions for this month.</td></tr>';let all=state.transactions.slice().sort((a,b)=>(b.date||'').localeCompare(a.date||'')).map(t=>`<tr><td>${esc(t.date)}</td><td>${esc(t.description)}</td><td>${esc(t.category)}</td><td>${esc(t.bucket)}</td><td>${esc(t.type)}</td><td>${money(t.amount)}</td><td>${esc(t.mpesaCode||'')}</td></tr>`).join('');$('transactionRows').innerHTML=all||'<tr><td colspan="7" class="empty">No transactions saved.</td></tr>'}
-function renderStandards(){let actuals={};monthTransactions().filter(t=>t.type==='expense').forEach(t=>actuals[t.category]=(actuals[t.category]||0)+Number(t.amount||0));$('standardsRows').innerHTML=state.standards.map((x,i)=>{let actual=actuals[x.category]||0,standard=Number(x.amount||0),variance=standard-actual;return `<tr><td>${esc(x.category)}</td><td>${esc(x.bucket)}</td><td><input class="stdAmount" data-i="${i}" type="number" min="0" step=".01" value="${standard}" style="width:140px;padding:8px;border:1px solid var(--line);border-radius:8px"></td><td>${money(actual)}</td><td><span class="pill ${variance<0?'bad':variance<standard*.2?'warn':''}">${money(variance)}</span></td><td><button class="small secondary" onclick="deleteStandard(${i})">Delete</button></td></tr>`}).join('')||'<tr><td colspan="6" class="empty">No standards configured.</td></tr>'}
-function renderRecurring(){$('recurringRows').innerHTML=state.recurringBills.map(b=>`<tr><td>${esc(b.name)}</td><td>${esc(b.category)}</td><td>${esc(b.bucket)}</td><td>${money(b.amount)}</td><td>${esc(b.dueDay)}</td><td>${b.active?'Yes':'No'}</td></tr>`).join('')||'<tr><td colspan="6" class="empty">No recurring bills yet.</td></tr>'}
-function renderMonthlyBills(){$('monthlyBillRows').innerHTML=state.monthlyBills.filter(b=>b.month===state.month).map(b=>`<tr><td>${esc(b.name)}</td><td>${esc(b.dueDate)}</td><td>${money(b.amount)}</td><td><span class="pill ${b.status==='Settled'?'':'warn'}">${esc(b.status)}</span></td><td>${esc(b.transactionId||'—')}</td></tr>`).join('')||'<tr><td colspan="5" class="empty">No bills for selected month.</td></tr>'}
-function renderGoals(){$('goalRows').innerHTML=state.goals.map(g=>`<tr><td>${esc(g.name)}</td><td>${money(g.target)}</td><td>${money(g.current)}</td><td>${esc(g.targetDate||'—')}</td><td>${Math.min(100,Number(g.target)?Number(g.current)/Number(g.target)*100:0).toFixed(1)}%</td></tr>`).join('')||'<tr><td colspan="5" class="empty">No savings goals. Add one to start tracking.</td></tr>'}
-function renderReports(){let s=sums();$('reportSummary').innerHTML=`<p>Income: <strong>${money(s.income)}</strong></p><p>Expenses: <strong>${money(s.expenses)}</strong></p><p>Savings/investment: <strong>${money(s.savings)}</strong></p><p>Net remaining: <strong>${money(s.balance)}</strong></p>`;let ts=monthTransactions().filter(t=>t.type==='expense');let cat={};ts.forEach(t=>cat[t.category]=(cat[t.category]||0)+Number(t.amount||0));$('categoryReport').innerHTML=Object.entries(cat).sort((a,b)=>b[1]-a[1]).map(([c,a])=>`<div class="bar-row"><div class="bar-head"><span>${esc(c)}</span><strong>${money(a)}</strong></div><div class="bar"><span style="width:${s.expenses?a/s.expenses*100:0}%"></span></div></div>`).join('')||'<div class="empty">No categorized expense data for this month.</div>'}
-function renderBuckets(){$('bucketRows').innerHTML=state.buckets.map((b,i)=>`<tr><td><input class="bucketName" data-i="${i}" value="${esc(b.bucket)}"></td><td><input class="bucketPercent" data-i="${i}" type="number" min="0" max="100" step="1" value="${Number(b.percent)}" style="width:85px"></td><td><input class="bucketIncludes" data-i="${i}" value="${esc(b.includes||'')}" style="min-width:200px"></td><td><button class="small danger" onclick="deleteBucket(${i})">Remove</button></td></tr>`).join('')||'<tr><td colspan="4" class="empty">No buckets configured.</td></tr>'}
-function refreshAll(){api('getData',{month:state.month}).then(d=>{state.transactions=d.transactions||[];state.standards=d.standards||[];state.buckets=d.buckets||[];state.recurringBills=d.recurringBills||[];state.monthlyBills=d.monthlyBills||[];state.goals=d.goals||[];render()}).catch(e=>alert(e.message))}
-function tab(tab){document.querySelectorAll('.tab-panel').forEach(x=>x.classList.toggle('active',x.id===tab));document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.tab===tab));let title={dashboard:'Dashboard',mpesa:'M-Pesa entry',transactions:'Transactions',budget:'Budget standards',bills:'Recurring bills',goals:'Savings & goals',reports:'Reports',settings:'Settings'};$('pageTitle').textContent=title[tab]||'My Money';$('sidebar').classList.remove('open')}
-function modal(content){$('modal').innerHTML=content;$('modalBg').style.display='flex'}function closeModal(){$('modalBg').style.display='none'}
-function addStandard(){modal(`<h2>Add category standard</h2><form id="stdForm"><div class="field"><label>Category name *</label><input name="category" required></div><div class="field" style="margin-top:10px"><label>Bucket *</label><select name="bucket" required>${state.buckets.map(b=>`<option>${esc(b.bucket)}</option>`).join('')}</select></div><div class="field" style="margin-top:10px"><label>Monthly standard (KES)</label><input name="amount" type="number" min="0" step=".01" value="0"></div><div class="actions"><button class="primary">Save category</button><button type="button" class="secondary" onclick="closeModal()">Cancel</button></div></form>`);$('stdForm').onsubmit=async e=>{e.preventDefault();let f=new FormData(e.target);try{await api('addStandard',{category:f.get('category'),bucket:f.get('bucket'),amount:Number(f.get('amount'))});closeModal();refreshAll()}catch(err){alert(err.message)}}}
-function addBill(){modal(`<h2>Add recurring bill</h2><form id="billForm"><div class="field"><label>Bill name *</label><input name="name" required></div><div class="form-grid" style="margin-top:10px"><div class="field"><label>Category *</label><select name="category" required>${state.standards.map(s=>`<option>${esc(s.category)}</option>`).join('')}</select></div><div class="field"><label>Amount *</label><input name="amount" type="number" step=".01" min="0" required></div><div class="field"><label>Due day (1–31)</label><input name="dueDay" type="number" min="1" max="31" value="1"></div><div class="field"><label>Active</label><select name="active"><option value="true">Yes</option><option value="false">No</option></select></div></div><div class="actions"><button class="primary">Save bill</button><button type="button" class="secondary" onclick="closeModal()">Cancel</button></div></form>`);$('billForm').onsubmit=async e=>{e.preventDefault();let f=new FormData(e.target),cat=f.get('category');try{await api('addRecurringBill',{name:f.get('name'),category:cat,bucket:bucketFor(cat),amount:Number(f.get('amount')),dueDay:Number(f.get('dueDay')),active:f.get('active')==='true'});closeModal();refreshAll()}catch(err){alert(err.message)}}}
-function addGoal(){modal(`<h2>Add savings goal</h2><form id="goalForm"><div class="field"><label>Goal name *</label><input name="name" required></div><div class="form-grid" style="margin-top:10px"><div class="field"><label>Target amount *</label><input name="target" type="number" min="1" step=".01" required></div><div class="field"><label>Current amount</label><input name="current" type="number" min="0" step=".01" value="0"></div><div class="field"><label>Target date</label><input name="targetDate" type="date"></div></div><div class="actions"><button class="primary">Save goal</button><button type="button" class="secondary" onclick="closeModal()">Cancel</button></div></form>`);$('goalForm').onsubmit=async e=>{e.preventDefault();let f=new FormData(e.target);try{await api('addGoal',{name:f.get('name'),target:Number(f.get('target')),current:Number(f.get('current')),targetDate:f.get('targetDate')});closeModal();refreshAll()}catch(err){alert(err.message)}}}
-function addBucket(){modal(`<h2>Add budget bucket</h2><form id="bucketForm"><div class="field"><label>Bucket name *</label><input name="bucket" required></div><div class="field" style="margin-top:10px"><label>Allocation (%) *</label><input name="percent" type="number" min="0" max="100" required></div><div class="field" style="margin-top:10px"><label>Includes</label><input name="includes"></div><div class="actions"><button class="primary">Save bucket</button><button type="button" class="secondary" onclick="closeModal()">Cancel</button></div></form>`);$('bucketForm').onsubmit=async e=>{e.preventDefault();let f=new FormData(e.target);try{await api('addBucket',{bucket:f.get('bucket'),percent:Number(f.get('percent')),includes:f.get('includes')});closeModal();refreshAll()}catch(err){alert(err.message)}}}
-function manualAdd(){modal(`<h2>Record transaction</h2><form id="manualForm"><div class="field"><label>Date *</label><input name="date" type="date" required value="${new Date().toISOString().slice(0,10)}"></div><div class="field" style="margin-top:10px"><label>Description *</label><input name="description" required></div><div class="form-grid" style="margin-top:10px"><div class="field"><label>Amount *</label><input name="amount" type="number" min=".01" step=".01" required></div><div class="field"><label>Type *</label><select name="type"><option>expense</option><option>income</option><option>saving</option><option>investment</option></select></div><div class="field"><label>Category *</label><select name="category" required>${state.standards.map(s=>`<option>${esc(s.category)}</option>`).join('')}</select></div><div class="field"><label>Payment method</label><input name="paymentMethod" value="M-Pesa"></div></div><div class="field" style="margin-top:10px"><label>Note</label><input name="note"></div><div class="actions"><button class="primary">Save transaction</button><button type="button" class="secondary" onclick="closeModal()">Cancel</button></div></form>`);$('manualForm').onsubmit=async e=>{e.preventDefault();let f=new FormData(e.target),cat=f.get('category');try{await api('addTransaction',{date:f.get('date'),description:f.get('description'),amount:Number(f.get('amount')),type:f.get('type'),category:cat,bucket:bucketFor(cat),paymentMethod:f.get('paymentMethod'),note:f.get('note')});closeModal();refreshAll()}catch(err){alert(err.message)}}}
-window.deleteStandard=async i=>{if(!confirm('Delete this category standard?'))return;try{await api('deleteStandard',{category:state.standards[i].category});refreshAll()}catch(e){alert(e.message)}};window.deleteBucket=async i=>{if(!confirm('Remove this bucket?'))return;try{await api('deleteBucket',{bucket:state.buckets[i].bucket});refreshAll()}catch(e){alert(e.message)}};
-$('connectBtn').onclick=()=>{localStorage.setItem('myMoneyUrl',$('apiUrl').value.trim());localStorage.setItem('myMoneyKey',$('apiKey').value.trim());api('getData',{month:state.month}).then(()=>{setView();refreshAll()}).catch(e=>showStatus($('loginStatus'),e.message,false))};$('refreshBtn').onclick=refreshAll;$('period').value=state.month;$('period').onchange=()=>{state.month=$('period').value;refreshAll()};document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>tab(b.dataset.tab));$('menuBtn').onclick=()=>$('sidebar').classList.toggle('open');$('parseBtn').onclick=()=>{try{state.parsed=parseMpesa($('mpesaText').value);let p=state.parsed;$('pCode').textContent=p.code;$('pAmount').textContent=money(p.amount);$('pRecipient').textContent=p.recipient;$('pDate').textContent=p.date+' '+p.time;$('pType').textContent=p.type;$('mpesaPreview').classList.remove('hidden');$('submitMpesa').disabled=false;hideStatus($('parseStatus'))}catch(e){showStatus($('parseStatus'),e.message,false);$('mpesaPreview').classList.add('hidden');$('submitMpesa').disabled=true}};$('clearMpesa').onclick=()=>{$('mpesaText').value='';$('mpesaCategory').value='';$('mpesaNote').value='';state.parsed=null;$('mpesaPreview').classList.add('hidden');$('submitMpesa').disabled=true;hideStatus($('parseStatus'))};$('mpesaCategory').onchange=()=>{$('mpesaBucket').value=bucketFor($('mpesaCategory').value)};$('mpesaForm').onsubmit=async e=>{e.preventDefault();if(!state.parsed||!$('mpesaCategory').value)return;let p=state.parsed;try{let d=await api('addTransaction',{date:p.date,description:p.recipient,amount:p.amount,type:p.type,category:$('mpesaCategory').value,bucket:bucketFor($('mpesaCategory').value),paymentMethod:'M-Pesa',mpesaCode:p.code,mpesaTime:p.time,rawMessage:p.raw,note:$('mpesaNote').value});showStatus($('parseStatus'),d.message||'Transaction saved successfully.');$('mpesaText').value='';$('mpesaCategory').value='';$('mpesaNote').value='';$('mpesaBucket').value='';state.parsed=null;$('mpesaPreview').classList.add('hidden');$('submitMpesa').disabled=true;refreshAll()}catch(err){showStatus($('parseStatus'),err.message,false)}};$('manualAdd').onclick=manualAdd;$('addStandard').onclick=addStandard;$('saveStandards').onclick=async()=>{let standards=state.standards.map((x,i)=>({...x,amount:Number(document.querySelector(`.stdAmount[data-i=\"${i}\"]`).value)}));try{await api('updateStandards',{standards});refreshAll();alert('Category standards saved.')}catch(e){alert(e.message)}};$('addBill').onclick=addBill;$('addGoal').onclick=addGoal;$('addBucket').onclick=addBucket;$('saveBuckets').onclick=async()=>{let b=state.buckets.map((x,i)=>({...x,bucket:document.querySelector(`.bucketName[data-i="${i}"]`).value,percent:Number(document.querySelector(`.bucketPercent[data-i="${i}"]`).value),includes:document.querySelector(`.bucketIncludes[data-i="${i}"]`).value}));let total=b.reduce((a,x)=>a+Number(x.percent||0),0);if(Math.abs(total-100)>0.001){alert('Budget bucket percentages must total 100%. Current total: '+total+'%.');return;}try{await api('saveBuckets',{buckets:b});refreshAll();alert('Allocation saved successfully.')}catch(e){alert(e.message)}};$('saveConnection').onclick=()=>{localStorage.setItem('myMoneyUrl',$('settingsUrl').value.trim());localStorage.setItem('myMoneyKey',$('settingsKey').value.trim());refreshAll();alert('Connection settings saved.')};$('disconnect').onclick=()=>{if(confirm('Remove saved connection from this browser?')){localStorage.removeItem('myMoneyUrl');localStorage.removeItem('myMoneyKey');setView()}};
-setView();if(getConn().url&&getConn().key)refreshAll();
+const $ = id => document.getElementById(id);
+const money = n => 'KES ' + Number(n || 0).toLocaleString('en-KE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+const HH_CATEGORIES = [
+  'Household Shopping', 'Food & Groceries', 'Cleaning Supplies', 'Toiletries',
+  'Electricity', 'Water', 'Cooking Gas', 'Internet', 'Other Utilities', 'Other Household Expenses'
+];
+
+const HH_BUDGET_CATEGORIES = [
+  'Groceries', 'Utilities', 'Cleaning supplies', 'Toiletries', 'Cooking gas', 'General household shopping'
+];
+
+let state = {
+  transactions: [], standards: [], buckets: [], incomeSources: [],
+  recurringBills: [], monthlyBills: [], settlements: [], goals: [],
+  hhItems: [], hhBills: [], hhBudgets: [],
+  month: new Date().toISOString().slice(0, 7),
+  parsed: null, submitting: false,
+  hhPage: 1, hhPageSize: 10
+};
+
+function toast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => { t.style.display = 'none'; }, 3400);
+}
+
+function getConn() {
+  const params = new URLSearchParams(window.location.search);
+  const urlParam = params.get('url');
+  const keyParam = params.get('key');
+  if (urlParam && keyParam) {
+    localStorage.setItem('myMoneyUrl', urlParam.trim());
+    localStorage.setItem('myMoneyKey', keyParam.trim());
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+  return { url: localStorage.getItem('myMoneyUrl') || '', key: localStorage.getItem('myMoneyKey') || '' };
+}
+
+function esc(v) { return String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function showStatus(el, msg, ok = true) { el.textContent = msg; el.className = 'status ' + (ok ? 'ok' : 'err'); }
+function hideStatus(el) { el.textContent = ''; el.className = 'status'; }
+
+async function api(action, data = {}) {
+  const c = getConn();
+  if (!c.url || !c.key) throw Error('Connection is not configured.');
+  const res = await fetch(c.url, {
+    method: 'POST', redirect: 'follow',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ action, key: c.key, ...data })
+  });
+  const raw = await res.text();
+  let json;
+  try { json = JSON.parse(raw); } catch (e) { throw Error('Apps Script returned a non-JSON response. Check Web App URL and deployment permissions.'); }
+  if (!json.ok) throw Error(json.error || 'Request failed');
+  return json.data;
+}
+
+function setView() {
+  const c = getConn();
+  if (!c.url || !c.key) {
+    $('loginView').classList.remove('hidden');
+    $('appView').classList.add('hidden');
+  } else {
+    $('loginView').classList.add('hidden');
+    $('appView').classList.remove('hidden');
+    $('settingsUrl').value = c.url;
+    $('settingsKey').value = c.key;
+    updateMagicLinkDisplay(c.url, c.key);
+  }
+}
+
+function updateMagicLinkDisplay(url, key) {
+  if (!$('magicSyncLink')) return;
+  const base = window.location.origin + window.location.pathname;
+  $('magicSyncLink').value = `${base}?url=${encodeURIComponent(url)}&key=${encodeURIComponent(key)}`;
+}
+
+/* ==================== DATE & FORECAST CALCULATIONS ==================== */
+function todayISO() { return new Date().toISOString().slice(0, 10); }
+function diffDays(d1, d2) {
+  const a = new Date(d1 + 'T00:00:00');
+  const b = new Date(d2 + 'T00:00:00');
+  if (isNaN(a) || isNaN(b)) return 0;
+  return Math.round((b - a) / 86400000);
+}
+function addDays(isoDate, days) {
+  const d = new Date((isoDate || todayISO()) + 'T00:00:00');
+  if (isNaN(d)) return todayISO();
+  d.setDate(d.getDate() + Math.round(Number(days || 0)));
+  return d.toISOString().slice(0, 10);
+}
+function fmtShortDate(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso + 'T00:00:00');
+  if (isNaN(d)) return iso;
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: '2-digit' });
+}
+
+function enrichHouseholdItem(item) {
+  const qtyPurchased = Number(item.qtyPurchased || 0);
+  const currentStock = Number(item.currentStock ?? qtyPurchased);
+  const minStock = Number(item.minStock || 0);
+  const totalCost = Number(item.totalCost || 0);
+  const unitCost = qtyPurchased > 0 ? totalCost / qtyPurchased : Number(item.unitCost || 0);
+  const durationDays = Math.max(1, Number(item.durationDays || 30));
+  const purchaseDate = item.purchaseDate || todayISO();
+  const expectedEndDate = item.endDate || addDays(purchaseDate, durationDays);
+
+  const dailyRate = qtyPurchased > 0 ? qtyPurchased / durationDays : 0;
+  const today = todayISO();
+  const calendarDaysLeft = diffDays(today, expectedEndDate);
+  const stockDaysLeft = dailyRate > 0 ? Math.floor(currentStock / dailyRate) : calendarDaysLeft;
+  const estDaysRemaining = currentStock <= 0 ? 0 : Math.max(0, Math.min(calendarDaysLeft, stockDaysLeft));
+
+  const estDepletionDate = currentStock <= 0 ? today : addDays(today, estDaysRemaining);
+  const replenishmentDate = addDays(estDepletionDate, -3);
+  const nextPurchaseDate = estDaysRemaining <= 0 ? today : replenishmentDate;
+
+  let status = 'Available';
+  if (currentStock <= 0 || calendarDaysLeft < 0) {
+    status = 'Out of Stock';
+  } else if (estDaysRemaining <= 3 || (minStock > 0 && currentStock <= minStock * 0.5)) {
+    status = 'Due for Replenishment';
+  } else if (estDaysRemaining <= 7 || (minStock > 0 && currentStock <= minStock)) {
+    status = 'Running Low';
+  }
+
+  return {
+    ...item,
+    qtyPurchased, currentStock, minStock, totalCost, unitCost,
+    durationDays, purchaseDate, expectedEndDate,
+    dailyRate, estDaysRemaining, estDepletionDate,
+    replenishmentDate, nextPurchaseDate, status
+  };
+}
+
+function enrichHouseholdBill(bill) {
+  const expected = Number(bill.expectedAmount || 0);
+  const paid = Number(bill.amountPaid || 0);
+  const balance = Math.max(0, expected - paid);
+  const today = todayISO();
+  const daysToDue = bill.dueDate ? diffDays(today, bill.dueDate) : 99;
+
+  let status = 'Unpaid';
+  if (balance <= 0.01 && expected > 0) {
+    status = 'Paid';
+  } else if (bill.dueDate && daysToDue < 0) {
+    status = 'Overdue';
+  } else if (paid > 0 && balance > 0) {
+    status = 'Partially Paid';
+  }
+  return { ...bill, expectedAmount: expected, amountPaid: paid, balance, daysToDue, status };
+}
+
+/* ==================== M-PESA PARSER ==================== */
+function parseMpesa(text) {
+  const s = (text || '').trim();
+  if (!s) throw Error('Paste an M-Pesa message.');
+  const code = (s.match(/^\s*([A-Z0-9]{8,12})\s+Confirmed\b/i) || [])[1] || '';
+  const amount = (s.match(/(?:Ksh|KES)\s*([\d,]+(?:\.\d{1,2})?)/i) || [])[1];
+  const dateM = s.match(/\bon\s+(\d{1,2})\/(\d{1,2})\/(\d{2,4})/i);
+  const time = (s.match(/\bat\s+(\d{1,2}:\d{2}\s*(?:AM|PM))/i) || [])[1] || '';
+  if (!amount || !dateM) throw Error('Could not extract amount and date. Use a completed M-Pesa SMS.');
+  let yy = Number(dateM[3]);
+  if (yy < 100) yy += 2000;
+  const date = `${yy}-${String(dateM[2]).padStart(2, '0')}-${String(dateM[1]).padStart(2, '0')}`;
+  let recipient = '';
+  const patterns = [
+    /(?:paid\s+to|sent\s+to|send\s+money\s+to|bought\s+goods\s+from|paid\s+account\s+of|received\s+from)\s+(.+?)\s+on\s+\d{1,2}\/\d{1,2}\/\d{2,4}/i,
+    /(?:Paybill|Till)\s+(?:to\s+)?(.+?)\s+on\s+\d{1,2}\/\d{1,2}\/\d{2,4}/i
+  ];
+  for (const re of patterns) {
+    const m = s.match(re);
+    if (m) { recipient = m[1].replace(/[.,\s]+$/, '').trim(); break; }
+  }
+  if (!recipient) recipient = 'M-Pesa transaction';
+  const income = /received\s+from|you\s+have\s+received|credited\s+to\s+your\s+account/i.test(s);
+  return {
+    code,
+    requestId: code ? 'mpesa-' + code : 'mpesa-' + (window.crypto?.randomUUID ? crypto.randomUUID() : Date.now() + '-' + Math.random()),
+    amount: Number(amount.replace(/,/g, '')),
+    recipient, description: recipient, date, time,
+    type: income ? 'income' : 'expense',
+    raw: s, paymentMethod: 'M-Pesa'
+  };
+}
+
+function bucketFor(cat) { return state.standards.find(x => String(x.category) === String(cat))?.bucket || ''; }
+function monthTx() { return state.transactions.filter(t => String(t.date || '').slice(0, 7) === state.month); }
+
+function sums() {
+  const tx = monthTx();
+  const income = tx.filter(t => t.type === 'income').reduce((a, t) => a + Number(t.amount || 0), 0);
+  const expenses = tx.filter(t => ['expense', 'unplanned expense'].includes(t.type)).reduce((a, t) => a + Number(t.amount || 0), 0);
+  const savings = tx.filter(t => ['saving', 'investment'].includes(t.type)).reduce((a, t) => a + Number(t.amount || 0), 0);
+  const billRows = state.monthlyBills.filter(b => b.month === state.month);
+  const unpaidGeneral = billRows.filter(b => b.status !== 'Settled').reduce((a, b) => a + Number(b.balance || 0), 0);
+  const unpaidHh = state.hhBills.map(enrichHouseholdBill).filter(b => b.status !== 'Paid').reduce((a, b) => a + b.balance, 0);
+  const unpaid = unpaidGeneral + unpaidHh;
+  return { income, expenses, savings, unpaid, unpaidGeneral, unpaidHh, cash: income - expenses - savings, available: income - expenses - savings - unpaid };
+}
+
+/* ==================== MASTER RENDER ==================== */
+function render() {
+  const s = sums();
+  $('incomeMetric').textContent = money(s.income);
+  $('expenseMetric').textContent = money(s.expenses);
+  $('savingMetric').textContent = money(s.savings);
+  $('balanceMetric').textContent = money(s.available);
+
+  renderFinancial(s);
+  renderBudget();
+  renderBillSummary(s);
+  renderTransactions();
+  renderStandards();
+  renderBills();
+  renderGoals();
+  renderReports();
+  renderBuckets();
+  renderIncomeSources();
+  renderIncomeTab(s);
+  renderHouseholdModule();
+  refreshSelects();
+}
+
+function renderFinancial(s) {
+  $('financialPosition').innerHTML = `
+    <div class="bucket-list">
+      <div class="bucket"><div class="bucket-top"><span>Cash balance from recorded activity</span><b>${money(s.cash)}</b></div></div>
+      <div class="bucket"><div class="bucket-top"><span>Outstanding general & household bills</span><b>${money(s.unpaid)}</b></div></div>
+      <div class="bucket"><div class="bucket-top"><span>Available after outstanding bills</span><b style="color:var(--teal)">${money(s.available)}</b></div></div>
+      <div class="bucket"><div class="bucket-top"><span>Goal balances</span><b>${money(state.goals.reduce((a, g) => a + Number(g.current || 0), 0))}</b></div></div>
+    </div>`;
+}
+
+function renderBudget() {
+  const ts = monthTx().filter(t => ['expense', 'unplanned expense'].includes(t.type));
+  $('budgetBars').innerHTML = state.buckets.map(b => {
+    const standard = state.standards.filter(x => x.bucket === b.bucket).reduce((a, x) => a + Number(x.amount || 0), 0);
+    const actual = ts.filter(t => t.bucket === b.bucket).reduce((a, t) => a + Number(t.amount || 0), 0);
+    const pct = standard ? actual / standard * 100 : 0;
+    return `<div class="bucket"><div class="bucket-top"><strong>${esc(b.bucket)} · ${Number(b.percent || 0)}%</strong><b>${money(actual)} / ${money(standard)}</b></div><div class="bar"><span style="width:${Math.min(100, pct)}%;background:${pct > 100 ? '#c44747' : pct >= 80 ? '#bb7a24' : '#0d9488'}"></span></div><div class="inline-note">${pct.toFixed(0)}% of category standards used</div></div>`;
+  }).join('') || '<div class="empty">No bucket setup yet.</div>';
+}
+
+function renderBillSummary(s) {
+  const bills = state.monthlyBills.filter(b => b.month === state.month);
+  const settled = bills.filter(b => b.status === 'Settled').length;
+  const hhItems = state.hhItems.map(enrichHouseholdItem);
+  const lowCount = hhItems.filter(i => ['Running Low', 'Due for Replenishment', 'Out of Stock'].includes(i.status)).length;
+  $('billSummary').innerHTML = `
+    <div class="bucket-list">
+      <div class="bucket"><b>General Bills: ${settled} of ${bills.length} settled</b><div class="inline-note">Outstanding General: ${money(s.unpaidGeneral)}</div></div>
+      <div class="bucket"><b>Household Inventory & Utilities</b><div class="inline-note">${lowCount} item(s) need restocking · ${money(s.unpaidHh)} unpaid household bills</div></div>
+    </div>`;
+}
+
+/* ==================== HOUSEHOLD MANAGEMENT MODULE RENDERING ==================== */
+function renderHouseholdModule() {
+  const items = state.hhItems.map(enrichHouseholdItem);
+  const bills = state.hhBills.map(enrichHouseholdBill);
+  const hhMonthTx = monthTx().filter(t => ['expense', 'unplanned expense'].includes(t.type) && (t.hhCategory || HH_CATEGORIES.includes(t.category)));
+
+  // Calculate Household Spend for selected month
+  const catSpend = {};
+  HH_CATEGORIES.forEach(c => catSpend[c] = 0);
+  hhMonthTx.forEach(t => {
+    const c = t.hhCategory || t.category || 'Other Household Expenses';
+    catSpend[c] = (catSpend[c] || 0) + Number(t.amount || 0);
+  });
+
+  // Also include household items purchased in selected month if not already in transactions
+  items.filter(i => String(i.purchaseDate).slice(0, 7) === state.month).forEach(i => {
+    const alreadyLogged = hhMonthTx.some(t => String(t.hhItemId) === String(i.id));
+    if (!alreadyLogged) {
+      catSpend[i.category] = (catSpend[i.category] || 0) + i.totalCost;
+    }
+  });
+
+  const totalHhSpend = Object.values(catSpend).reduce((a, b) => a + b, 0);
+  const groceryCats = ['Household Shopping', 'Food & Groceries', 'Cleaning Supplies', 'Toiletries'];
+  const utilityCats = ['Electricity', 'Water', 'Cooking Gas', 'Internet', 'Other Utilities'];
+  const grocerySpend = groceryCats.reduce((a, c) => a + (catSpend[c] || 0), 0);
+  const utilitySpend = utilityCats.reduce((a, c) => a + (catSpend[c] || 0), 0);
+
+  const totalBillsExpected = bills.reduce((a, b) => a + b.expectedAmount, 0);
+  const totalBillsPaid = bills.reduce((a, b) => a + b.amountPaid, 0);
+  const totalBillsOutstanding = bills.reduce((a, b) => a + b.balance, 0);
+  const upcomingBills = bills.filter(b => b.status !== 'Paid' && b.daysToDue <= 14);
+
+  const lowItems = items.filter(i => i.status === 'Running Low');
+  const dueItems = items.filter(i => i.status === 'Due for Replenishment');
+  const outItems = items.filter(i => i.status === 'Out of Stock');
+  const attentionTotal = lowItems.length + dueItems.length + outItems.length;
+
+  // Estimated next month spend (recurring bills + 30-day normalized consumable burn)
+  const monthlyRecurringCost = bills.reduce((a, b) => {
+    if (b.frequency === 'Weekly') return a + b.expectedAmount * 4.33;
+    if (b.frequency === 'Quarterly') return a + b.expectedAmount / 3;
+    if (b.frequency === 'Annually') return a + b.expectedAmount / 12;
+    return a + b.expectedAmount;
+  }, 0);
+  const monthlyConsumableBurn = items.reduce((a, i) => a + (i.totalCost / i.durationDays) * 30, 0);
+  const estNextMonth = monthlyRecurringCost + monthlyConsumableBurn;
+
+  // Update KPI Cards
+  $('hhTotalSpend').textContent = money(totalHhSpend);
+  $('hhEstNextMonth').textContent = `Est. next month: ${money(estNextMonth)}`;
+  $('hhGrocerySpend').textContent = money(grocerySpend);
+  $('hhUtilitySpend').textContent = `${money(utilitySpend)} / ${money(totalBillsPaid)}`;
+  $('hhBillsPaidFoot').textContent = `Billed: ${money(totalBillsExpected)} · Paid: ${money(totalBillsPaid)}`;
+  $('hhOutstandingBills').textContent = money(totalBillsOutstanding);
+  $('hhUpcomingBillsCount').textContent = `${upcomingBills.length} bill(s) due soon / overdue`;
+  $('hhStockAttention').textContent = `${attentionTotal} item(s)`;
+  $('hhStockBreakdown').textContent = `${lowItems.length} low · ${dueItems.length} due · ${outItems.length} out`;
+
+  // Alerts & Notifications Engine
+  const alerts = [];
+  outItems.forEach(i => alerts.push({ level: 'red', text: `OUT OF STOCK: ${i.name} (${i.category}) has run out or passed its expected end date.` }));
+  dueItems.forEach(i => alerts.push({ level: 'orange', text: `REPLENISHMENT REQUIRED: ${i.name} will run out in ${i.estDaysRemaining} day(s) (${fmtShortDate(i.estDepletionDate)}).` }));
+  lowItems.forEach(i => alerts.push({ level: 'amber', text: `RUNNING LOW: ${i.name} has ${i.currentStock} ${i.unit} remaining (~${i.estDaysRemaining} days left).` }));
+  bills.filter(b => b.status === 'Overdue').forEach(b => alerts.push({ level: 'red', text: `OVERDUE BILL: ${b.name} (${money(b.balance)}) was due on ${fmtShortDate(b.dueDate)}.` }));
+  bills.filter(b => b.status !== 'Paid' && b.status !== 'Overdue' && b.daysToDue <= 7).forEach(b => alerts.push({ level: 'amber', text: `BILL DUE SOON: ${b.name} (${money(b.balance)}) is due in ${b.daysToDue} day(s) on ${fmtShortDate(b.dueDate)}.` }));
+
+  // Check Household Budget Thresholds (80% & 100%)
+  const budgetControls = buildHouseholdBudgetStats(catSpend);
+  budgetControls.forEach(bc => {
+    if (bc.budget > 0 && bc.pct >= 100) {
+      alerts.push({ level: 'red', text: `BUDGET EXCEEDED: ${bc.category} spending (${money(bc.actual)}) has reached ${bc.pct.toFixed(0)}% of your ${money(bc.budget)} budget!` });
+    } else if (bc.budget > 0 && bc.pct >= 80) {
+      alerts.push({ level: 'amber', text: `BUDGET WARNING (80%+): ${bc.category} has used ${bc.pct.toFixed(0)}% (${money(bc.actual)} / ${money(bc.budget)}).` });
+    }
+  });
+
+  const badge = $('hhAlertBadge');
+  if (alerts.length > 0) {
+    badge.textContent = alerts.length;
+    badge.classList.remove('hidden');
+  } else {
+    badge.classList.add('hidden');
+  }
+
+  $('hhAlertsContainer').innerHTML = alerts.slice(0, 6).map(a => `
+    <div class="alert-box ${a.level}">
+      <span>${esc(a.text)}</span>
+      <span class="pill ${a.level === 'red' ? 'bad' : a.level === 'orange' ? 'orange' : 'warn'}">${a.level.toUpperCase()}</span>
+    </div>
+  `).join('');
+
+  // Render Charts
+  renderHhCharts(catSpend, totalHhSpend, totalBillsPaid, totalBillsOutstanding, items);
+
+  // Render Items Table (with Search, Filters, Sort, Pagination)
+  renderHhItemsTable(items);
+
+  // Render Bills Table
+  renderHhBillsTable(bills);
+
+  // Render Household Budgets Table
+  $('hhBudgetRows').innerHTML = budgetControls.map((bc, idx) => `
+    <tr>
+      <td><strong>${esc(bc.category)}</strong></td>
+      <td><input type="number" class="hhBudgetInput" data-cat="${esc(bc.category)}" min="0" step="100" value="${bc.budget}" style="width:130px"></td>
+      <td>${money(bc.actual)}</td>
+      <td><span style="color:${bc.remaining < 0 ? 'var(--red)' : 'var(--green)'};font-weight:700">${money(bc.remaining)}</span></td>
+      <td>
+        <div style="min-width:90px">${bc.budget > 0 ? bc.pct.toFixed(0) + '%' : 'No limit'}</div>
+        ${bc.budget > 0 ? `<div class="bar" style="margin-top:4px"><span style="width:${Math.min(100, bc.pct)}%;background:${bc.pct >= 100 ? '#c44747' : bc.pct >= 80 ? '#bb7a24' : '#0d9488'}"></span></div>` : ''}
+      </td>
+      <td>${money(bc.projected)}</td>
+      <td>${bc.budget <= 0 ? '<span class="pill info">Unset</span>' : bc.pct >= 100 ? '<span class="pill bad">Exceeded (100%+)</span>' : bc.pct >= 80 ? '<span class="pill warn">Warning (80%+)</span>' : '<span class="pill">On Track</span>'}</td>
+    </tr>
+  `).join('');
+
+  // Render Replenishment List
+  const replenishItems = items.filter(i => ['Running Low', 'Due for Replenishment', 'Out of Stock'].includes(i.status))
+    .sort((a, b) => a.estDaysRemaining - b.estDaysRemaining);
+  const estRestockSum = replenishItems.reduce((a, i) => a + (i.unitCost * (i.qtyPurchased || 1)), 0);
+  $('hhReplenishTotal').textContent = `Est. Restock Cost: ${money(estRestockSum)}`;
+  $('hhReplenishRows').innerHTML = replenishItems.map(i => {
+    const sugQty = i.qtyPurchased || 1;
+    const estCost = i.unitCost * sugQty;
+    return `
+      <tr>
+        <td><strong>${esc(i.name)}</strong></td>
+        <td>${esc(i.category)}</td>
+        <td>${i.currentStock} ${esc(i.unit)}</td>
+        <td>${i.minStock} ${esc(i.unit)}</td>
+        <td>${fmtShortDate(i.estDepletionDate)} (${i.estDaysRemaining}d)</td>
+        <td>${money(i.unitCost)}</td>
+        <td>${sugQty} ${esc(i.unit)}</td>
+        <td><strong>${money(estCost)}</strong></td>
+        <td>${statusPill(i.status)}</td>
+        <td><button class="primary small" onclick="openRestockModal('${esc(i.id)}')">Restock Now</button></td>
+      </tr>`;
+  }).join('') || '<tr><td colspan="10" class="empty">All household items are adequately stocked!</td></tr>';
+}
+
+function buildHouseholdBudgetStats(catSpend) {
+  const mapActual = {
+    'Groceries': (catSpend['Food & Groceries'] || 0),
+    'Utilities': (catSpend['Electricity'] || 0) + (catSpend['Water'] || 0) + (catSpend['Internet'] || 0) + (catSpend['Other Utilities'] || 0),
+    'Cleaning supplies': (catSpend['Cleaning Supplies'] || 0),
+    'Toiletries': (catSpend['Toiletries'] || 0),
+    'Cooking gas': (catSpend['Cooking Gas'] || 0),
+    'General household shopping': (catSpend['Household Shopping'] || 0) + (catSpend['Other Household Expenses'] || 0)
+  };
+  const now = new Date();
+  const dayOfMonth = Math.max(1, now.getDate());
+  const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+  const isCurrentMonth = state.month === todayISO().slice(0, 7);
+
+  return HH_BUDGET_CATEGORIES.map(cat => {
+    const found = state.hhBudgets.find(b => String(b.category).toLowerCase() === cat.toLowerCase());
+    const budget = Number(found?.amount || 0);
+    const actual = mapActual[cat] || 0;
+    const remaining = budget - actual;
+    const pct = budget > 0 ? (actual / budget) * 100 : 0;
+    const projected = isCurrentMonth ? (actual / dayOfMonth) * daysInMonth : actual;
+    return { category: cat, budget, actual, remaining, pct, projected };
+  });
+}
+
+function renderHhCharts(catSpend, totalHhSpend, paidBills, unpaidBills, items) {
+  const colors = ['#0d9488', '#2563b8', '#176b50', '#d97706', '#7c3aed', '#db2777', '#059669', '#4f46e5'];
+  const activeCats = Object.entries(catSpend).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]);
+
+  if (activeCats.length && totalHhSpend > 0) {
+    let acc = 0;
+    const stops = activeCats.map(([cat, val], idx) => {
+      const start = (acc / totalHhSpend) * 100;
+      acc += val;
+      const end = (acc / totalHhSpend) * 100;
+      return `${colors[idx % colors.length]} ${start.toFixed(1)}% ${end.toFixed(1)}%`;
+    });
+    $('hhCategoryChart').innerHTML = `
+      <div class="donut" style="background:conic-gradient(${stops.join(',')})"></div>
+      <div class="legend">
+        ${activeCats.map(([cat, val], idx) => `
+          <div class="legend-item">
+            <span><i class="dot" style="background:${colors[idx % colors.length]}"></i>${esc(cat)}</span>
+            <b>${money(val)} (${((val / totalHhSpend) * 100).toFixed(0)}%)</b>
+          </div>`).join('')}
+      </div>`;
+  } else {
+    $('hhCategoryChart').innerHTML = '<div class="empty">No household expenses recorded for this month yet.</div>';
+  }
+
+  // 6-Month Spending Trend
+  const months = [];
+  const [yr, mo] = state.month.split('-').map(Number);
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date(yr, mo - 1 - i, 1);
+    months.push(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`);
+  }
+  const trendData = months.map(m => {
+    const sum = state.transactions
+      .filter(t => String(t.date).slice(0, 7) === m && ['expense', 'unplanned expense'].includes(t.type) && (t.hhCategory || HH_CATEGORIES.includes(t.category)))
+      .reduce((a, t) => a + Number(t.amount || 0), 0);
+    return { month: m, sum };
+  });
+  const maxTrend = Math.max(1, ...trendData.map(x => x.sum));
+  $('hhTrendChart').innerHTML = `
+    <div class="trend-bars">
+      ${trendData.map(td => {
+        const h = Math.max(6, (td.sum / maxTrend) * 110);
+        return `<div class="trend-col"><div class="trend-val">${td.sum >= 1000 ? (td.sum / 1000).toFixed(1) + 'k' : td.sum.toFixed(0)}</div><div class="trend-bar" style="height:${h}px"></div><div class="trend-lbl">${td.month.slice(5)}</div></div>`;
+      }).join('')}
+    </div>`;
+
+  // Paid vs Unpaid Bills Bar
+  const totalB = paidBills + unpaidBills;
+  const paidPct = totalB > 0 ? (paidBills / totalB) * 100 : 0;
+  $('hhBillsChart').innerHTML = `
+    <div class="bucket-list">
+      <div class="bucket">
+        <div class="bucket-top"><span>Paid Household Bills</span><b style="color:var(--green)">${money(paidBills)} (${paidPct.toFixed(0)}%)</b></div>
+        <div class="bar"><span style="width:${paidPct}%;background:var(--green)"></span></div>
+      </div>
+      <div class="bucket">
+        <div class="bucket-top"><span>Unpaid / Outstanding Balance</span><b style="color:var(--red)">${money(unpaidBills)} (${(100 - paidPct).toFixed(0)}%)</b></div>
+        <div class="bar"><span style="width:${totalB > 0 ? 100 - paidPct : 0}%;background:var(--red)"></span></div>
+      </div>
+    </div>`;
+
+  // 14-Day Consumption & Replenishment Forecast
+  const upcoming = items.filter(i => i.estDaysRemaining <= 14).sort((a, b) => a.estDaysRemaining - b.estDaysRemaining).slice(0, 5);
+  $('hhForecastList').innerHTML = upcoming.map(i => `
+    <div class="bucket" style="padding:10px 12px">
+      <div class="bucket-top">
+        <strong>${esc(i.name)} <span class="muted">(${i.currentStock} ${esc(i.unit)})</span></strong>
+        ${statusPill(i.status)}
+      </div>
+      <div class="inline-note">Est. depletion: <b>${fmtShortDate(i.estDepletionDate)}</b> (${i.estDaysRemaining} days left) · Next purchase: ${fmtShortDate(i.nextPurchaseDate)}</div>
+    </div>
+  `).join('') || '<div class="empty">No items predicted to deplete within the next 14 days.</div>';
+}
+
+function renderHhItemsTable(items) {
+  const q = ($('hhItemSearch')?.value || '').toLowerCase();
+  const catF = $('hhItemCatFilter')?.value || '';
+  const stF = $('hhItemStatusFilter')?.value || '';
+  const sort = $('hhItemSort')?.value || 'depletion';
+
+  let filtered = items.filter(i => {
+    if (catF && i.category !== catF) return false;
+    if (stF && i.status !== stF) return false;
+    if (q && !`${i.name} ${i.category} ${i.description} ${i.supplier} ${i.notes}`.toLowerCase().includes(q)) return false;
+    return true;
+  });
+
+  filtered.sort((a, b) => {
+    if (sort === 'purchase') return String(b.purchaseDate).localeCompare(String(a.purchaseDate));
+    if (sort === 'cost') return b.totalCost - a.totalCost;
+    if (sort === 'name') return a.name.localeCompare(b.name);
+    return a.estDaysRemaining - b.estDaysRemaining;
+  });
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / state.hhPageSize));
+  if (state.hhPage > totalPages) state.hhPage = totalPages;
+  const start = (state.hhPage - 1) * state.hhPageSize;
+  const pageRows = filtered.slice(start, start + state.hhPageSize);
+
+  $('hhItemsRows').innerHTML = pageRows.map(i => `
+    <tr>
+      <td><strong>${esc(i.name)}</strong><div class="inline-note">${esc(i.category)}${i.supplier ? ' · ' + esc(i.supplier) : ''}</div></td>
+      <td>${i.qtyPurchased} ${esc(i.unit)}<div class="inline-note">${fmtShortDate(i.purchaseDate)}</div></td>
+      <td>${money(i.totalCost)}<div class="inline-note">${money(i.unitCost)} / ${esc(i.unit)}</div></td>
+      <td><strong>${i.currentStock} ${esc(i.unit)}</strong><div class="inline-note">Min: ${i.minStock} ${esc(i.unit)}</div></td>
+      <td>${i.dailyRate.toFixed(2)} ${esc(i.unit)}/d</td>
+      <td>${i.durationDays} days<div class="inline-note">Ends: ${fmtShortDate(i.expectedEndDate)}</div></td>
+      <td><strong>${i.estDaysRemaining} days</strong><div class="inline-note">Buy by: ${fmtShortDate(i.nextPurchaseDate)}</div></td>
+      <td>${statusPill(i.status)}</td>
+      <td>
+        <div style="display:flex;gap:5px">
+          <button class="secondary small" onclick="openUpdateStockModal('${esc(i.id)}')">Stock</button>
+          <button class="primary small" onclick="openRestockModal('${esc(i.id)}')">Restock</button>
+          <button class="danger small" onclick="deleteHhItem('${esc(i.id)}')">✕</button>
+        </div>
+      </td>
+    </tr>
+  `).join('') || '<tr><td colspan="9" class="empty">No household items found matching your filter.</td></tr>';
+
+  $('hhItemsPagination').innerHTML = `
+    <span>Showing ${pageRows.length} of ${filtered.length} item(s)</span>
+    <div style="display:flex;gap:6px">
+      <button class="secondary small" ${state.hhPage <= 1 ? 'disabled' : ''} onclick="changeHhPage(-1)">Prev</button>
+      <span style="padding:6px 8px">Page ${state.hhPage} of ${totalPages}</span>
+      <button class="secondary small" ${state.hhPage >= totalPages ? 'disabled' : ''} onclick="changeHhPage(1)">Next</button>
+    </div>`;
+}
+
+window.changeHhPage = delta => { state.hhPage += delta; renderHouseholdModule(); };
+
+function renderHhBillsTable(bills) {
+  const q = ($('hhBillSearch')?.value || '').toLowerCase();
+  const stF = $('hhBillStatusFilter')?.value || '';
+  const filtered = bills.filter(b => {
+    if (stF && b.status !== stF) return false;
+    if (q && !`${b.name} ${b.category} ${b.provider} ${b.accountNumber}`.toLowerCase().includes(q)) return false;
+    return true;
+  }).sort((a, b) => String(a.dueDate).localeCompare(String(b.dueDate)));
+
+  $('hhBillsRows').innerHTML = filtered.map(b => `
+    <tr>
+      <td><strong>${esc(b.name)}</strong><div class="inline-note">${esc(b.category)}</div></td>
+      <td>${esc(b.provider || '—')}<div class="inline-note">${esc(b.accountNumber || '')}</div></td>
+      <td>${esc(b.frequency)}</td>
+      <td>${money(b.expectedAmount)}</td>
+      <td>${money(b.amountPaid)}</td>
+      <td><strong style="color:${b.balance > 0 ? 'var(--red)' : 'var(--green)'}">${money(b.balance)}</strong></td>
+      <td>${fmtShortDate(b.dueDate)}</td>
+      <td>${fmtShortDate(b.nextBillingDate)}</td>
+      <td>${statusPill(b.status)}</td>
+      <td>
+        <div style="display:flex;gap:5px">
+          ${b.status !== 'Paid' ? `<button class="primary small" onclick="openPayHhBillModal('${esc(b.id)}')">Mark Paid</button>` : ''}
+          <button class="danger small" onclick="deleteHhBill('${esc(b.id)}')">✕</button>
+        </div>
+      </td>
+    </tr>
+  `).join('') || '<tr><td colspan="10" class="empty">No household bills registered yet.</td></tr>';
+}
+
+function statusPill(status) {
+  if (['Available', 'Paid', 'Settled'].includes(status)) return `<span class="pill">${esc(status)}</span>`;
+  if (['Running Low', 'Partially Paid'].includes(status)) return `<span class="pill warn">${esc(status)}</span>`;
+  if (['Due for Replenishment', 'Unpaid'].includes(status)) return `<span class="pill orange">${esc(status)}</span>`;
+  return `<span class="pill bad">${esc(status)}</span>`;
+}
+
+/* ==================== INCOME MANAGER TAB ==================== */
+function renderIncomeTab(s) {
+  const incMonth = monthTx().filter(t => t.type === 'income');
+  const yr = state.month.slice(0, 4);
+  const incYtd = state.transactions.filter(t => t.type === 'income' && String(t.date).startsWith(yr)).reduce((a, t) => a + Number(t.amount || 0), 0);
+
+  const hhMonthSpend = monthTx().filter(t => ['expense', 'unplanned expense'].includes(t.type) && (t.hhCategory || HH_CATEGORIES.includes(t.category))).reduce((a, t) => a + Number(t.amount || 0), 0);
+  const ratio = s.income > 0 ? (hhMonthSpend / s.income) * 100 : 0;
+
+  $('incTabMonth').textContent = money(s.income);
+  $('incTabCount').textContent = `${incMonth.length} entry(ies) in ${state.month}`;
+  $('incTabYtd').textContent = money(incYtd);
+  $('incHhRatio').textContent = `${ratio.toFixed(1)}%`;
+  $('incTabNet').textContent = money(s.available);
+
+  const bySrc = {};
+  incMonth.forEach(t => {
+    const src = t.incomeSource || t.category || 'Other';
+    bySrc[src] = (bySrc[src] || 0) + Number(t.amount || 0);
+  });
+  $('incomeSourceBreakdown').innerHTML = Object.entries(bySrc).sort((a, b) => b[1] - a[1]).map(([src, amt]) => {
+    const pct = s.income > 0 ? (amt / s.income) * 100 : 0;
+    return `<div class="bucket"><div class="bucket-top"><strong>${esc(src)}</strong><b>${money(amt)} (${pct.toFixed(0)}%)</b></div><div class="bar"><span style="width:${pct}%"></span></div></div>`;
+  }).join('') || '<div class="empty">No income recorded for this month yet.</div>';
+
+  $('incomeLedgerRows').innerHTML = state.transactions.filter(t => t.type === 'income').sort((a, b) => String(b.date).localeCompare(String(a.date))).map(t => `
+    <tr>
+      <td>${esc(t.date)}</td>
+      <td><strong>${esc(t.incomeSource || '—')}</strong></td>
+      <td>${esc(t.category)}</td>
+      <td>${esc(t.description)}</td>
+      <td>${esc(t.paymentMethod || '—')}</td>
+      <td><strong style="color:var(--green)">${money(t.amount)}</strong></td>
+    </tr>
+  `).join('') || '<tr><td colspan="6" class="empty">No income transactions recorded.</td></tr>';
+}
+
+/* ==================== TRANSACTIONS, STANDARDS, BILLS, GOALS, REPORTS ==================== */
+function renderTransactions() {
+  const tx = monthTx().slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
+  $('recentRows').innerHTML = tx.slice(0, 8).map(t => `<tr><td>${esc(t.date)}</td><td>${esc(t.description)}</td><td>${esc(t.category)}${t.hhCategory ? ` <span class="pill info">${esc(t.hhCategory)}</span>` : ''}</td><td>${esc(t.type)}</td><td>${money(t.amount)}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">No activity this month.</td></tr>';
+
+  const q = ($('txSearch')?.value || '').toLowerCase();
+  const tf = $('txTypeFilter')?.value || '';
+  const allFiltered = state.transactions.filter(t => {
+    if (tf && t.type !== tf) return false;
+    if (q && !`${t.description} ${t.category} ${t.hhCategory} ${t.mpesaCode} ${t.incomeSource}`.toLowerCase().includes(q)) return false;
+    return true;
+  }).sort((a, b) => String(b.date).localeCompare(String(a.date)));
+
+  $('transactionRows').innerHTML = allFiltered.map(t => `
+    <tr>
+      <td>${esc(t.date)}</td>
+      <td>${esc(t.description)}${t.mpesaCode ? `<div class="inline-note">M-Pesa: ${esc(t.mpesaCode)}</div>` : ''}</td>
+      <td>${esc(t.category)}</td>
+      <td>${t.hhCategory ? `<span class="pill info">${esc(t.hhCategory)}</span>` : '—'}</td>
+      <td>${esc(t.bucket)}</td>
+      <td>${esc(t.type)}</td>
+      <td>${esc(t.incomeSource || t.paymentMethod || '')}</td>
+      <td>${money(t.amount)}</td>
+      <td>${t.unplanned ? 'Yes' : '—'}</td>
+    </tr>`).join('') || '<tr><td colspan="9" class="empty">No transactions yet.</td></tr>';
+
+  $('unplannedRows').innerHTML = state.transactions.filter(t => t.unplanned || t.type === 'unplanned expense').sort((a, b) => String(b.date).localeCompare(String(a.date))).map(t => `<tr><td>${esc(t.date)}</td><td>${esc(t.description)}</td><td>${esc(t.category)}</td><td>${money(t.amount)}</td><td>${esc(t.paymentMethod || '')}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">No unplanned expenses.</td></tr>';
+}
+
+function renderStandards() {
+  let actual = {};
+  monthTx().filter(t => ['expense', 'unplanned expense'].includes(t.type)).forEach(t => actual[t.category] = (actual[t.category] || 0) + Number(t.amount));
+  $('standardsRows').innerHTML = state.standards.map((x, i) => {
+    let a = actual[x.category] || 0, v = Number(x.amount) - a;
+    return `<tr><td>${esc(x.category)}</td><td>${esc(x.bucket)}</td><td><input class="stdAmount" data-i="${i}" type="number" min="0" step=".01" value="${Number(x.amount || 0)}" style="max-width:130px"></td><td>${money(a)}</td><td><span class="pill ${v < 0 ? 'bad' : v < Number(x.amount) * .2 ? 'warn' : ''}">${money(v)}</span></td><td><button class="small danger" onclick="deleteStandard(${i})">Delete</button></td></tr>`;
+  }).join('') || '<tr><td colspan="6" class="empty">No budget categories.</td></tr>';
+}
+
+function renderBills() {
+  const bs = state.monthlyBills.filter(b => b.month === state.month).sort((a, b) => String(a.dueDate).localeCompare(String(b.dueDate)));
+  const total = bs.reduce((a, b) => a + Number(b.amount || 0), 0), paid = bs.reduce((a, b) => a + Number(b.paidAmount || 0), 0), balance = bs.reduce((a, b) => a + Number(b.balance || 0), 0);
+  $('billTotal').textContent = money(total); $('billPaid').textContent = money(paid); $('billOutstanding').textContent = money(balance);
+  $('monthlyBillRows').innerHTML = bs.map(b => `<tr><td>${esc(b.name)}</td><td>${esc(b.billType || 'Bill')}</td><td>${esc(b.category)}</td><td>${esc(b.dueDate)}</td><td>${money(b.amount)}</td><td>${money(b.paidAmount)}</td><td>${money(b.balance)}</td><td><span class="pill ${b.status === 'Settled' ? '' : b.status === 'Overdue' ? 'bad' : 'warn'}">${esc(b.status || 'Pending')}</span></td></tr>`).join('') || '<tr><td colspan="8" class="empty">No bills generated for this month.</td></tr>';
+  $('recurringRows').innerHTML = state.recurringBills.map(b => `<tr><td>${esc(b.name)}</td><td>${esc(b.category)}</td><td>${money(b.amount)}</td><td>${esc(b.dueDay)}</td><td>${b.active ? 'Active' : 'Inactive'}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">No recurring bills yet.</td></tr>';
+}
+
+function renderGoals() {
+  $('goalRows').innerHTML = state.goals.map(g => {
+    const pct = g.target ? Math.min(100, Number(g.current) / Number(g.target) * 100) : 0;
+    return `<tr><td>${esc(g.name)}</td><td>${esc(g.type || 'Savings')}</td><td>${money(g.target)}</td><td>${money(g.current)}</td><td>${money(Math.max(0, Number(g.target) - Number(g.current)))}</td><td>${esc(g.targetDate || '—')}</td><td><div class="bar"><span style="width:${pct}%"></span></div>${pct.toFixed(1)}%</td></tr>`;
+  }).join('') || '<tr><td colspan="7" class="empty">No goals created.</td></tr>';
+}
+
+function renderReports() {
+  const s = sums();
+  $('reportSummary').innerHTML = `<p>Income: <b>${money(s.income)}</b></p><p>Expense: <b>${money(s.expenses)}</b></p><p>Savings / investments: <b>${money(s.savings)}</b></p><p>Unpaid bills (General + Household): <b>${money(s.unpaid)}</b></p><p>Available after bills: <b>${money(s.available)}</b></p>`;
+  const cats = {};
+  monthTx().filter(t => ['expense', 'unplanned expense'].includes(t.type)).forEach(t => cats[t.category] = (cats[t.category] || 0) + Number(t.amount));
+  $('categoryReport').innerHTML = Object.entries(cats).sort((a, b) => b[1] - a[1]).map(([c, a]) => `<div class="bucket"><div class="bucket-top"><span>${esc(c)}</span><b>${money(a)}</b></div><div class="bar"><span style="width:${s.expenses ? a / s.expenses * 100 : 0}%"></span></div></div>`).join('') || '<div class="empty">No expenses to report.</div>';
+}
+
+function renderBuckets() {
+  $('bucketRows').innerHTML = state.buckets.map((b, i) => `<tr><td><input class="bucketName" data-i="${i}" value="${esc(b.bucket)}"></td><td><input class="bucketPercent" data-i="${i}" type="number" min="0" max="100" value="${Number(b.percent)}" style="width:80px"></td><td><input class="bucketIncludes" data-i="${i}" value="${esc(b.includes || '')}" style="min-width:180px"></td><td><button class="small danger" onclick="deleteBucket(${i})">Delete</button></td></tr>`).join('') || '<tr><td colspan="4" class="empty">No budget buckets.</td></tr>';
+}
+
+function renderIncomeSources() {
+  $('incomeSourceRows').innerHTML = state.incomeSources.map(x => `<tr><td>${esc(x.source)}</td><td>Active</td></tr>`).join('') || '<tr><td colspan="2" class="empty">No sources set.</td></tr>';
+}
+
+function refreshSelects() {
+  const categoryOpts = '<option value="">Select category</option>' + state.standards.map(x => `<option value="${esc(x.category)}">${esc(x.category)}</option>`).join('');
+  $('mpesaCategory').innerHTML = categoryOpts;
+  const incomeOpts = '<option value="">Select source</option>' + state.incomeSources.map(x => `<option value="${esc(x.source)}">${esc(x.source)}</option>`).join('');
+  $('incomeSource').innerHTML = incomeOpts;
+  $('mpesaIncomeSource').innerHTML = '<option value="">Select source (optional)</option>' + state.incomeSources.map(x => `<option value="${esc(x.source)}">${esc(x.source)}</option>`).join('');
+  $('mpesaGoal').innerHTML = '<option value="">No goal linked</option>' + state.goals.map(g => `<option value="${esc(g.id)}">${esc(g.name)}</option>`).join('');
+
+  // Household selects
+  const hhCatOpts = HH_CATEGORIES.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
+  $('hhItemCatFilter').innerHTML = '<option value="">All Categories</option>' + hhCatOpts;
+  $('mpesaHhCategory').innerHTML = '<option value="">Not a household expense</option>' + hhCatOpts;
+  $('mpesaHhBill').innerHTML = '<option value="">None</option>' + state.hhBills.map(b => `<option value="${esc(b.id)}">${esc(b.name)} (Bal: ${money(b.balance)})</option>`).join('');
+  $('mpesaHhItem').innerHTML = '<option value="">None</option>' + state.hhItems.map(i => `<option value="${esc(i.id)}">${esc(i.name)} (${i.currentStock} ${esc(i.unit)})</option>`).join('');
+}
+
+function refreshAll() {
+  api('getData', { month: state.month }).then(d => {
+    if (d.connection && d.connection.url && d.connection.key) {
+      localStorage.setItem('myMoneyUrl', d.connection.url);
+      localStorage.setItem('myMoneyKey', d.connection.key);
+      $('settingsUrl').value = d.connection.url;
+      $('settingsKey').value = d.connection.key;
+      updateMagicLinkDisplay(d.connection.url, d.connection.key);
+    }
+    state.transactions = d.transactions || [];
+    state.standards = d.standards || [];
+    state.buckets = d.buckets || [];
+    state.incomeSources = d.incomeSources || [];
+    state.recurringBills = d.recurringBills || [];
+    state.monthlyBills = d.monthlyBills || [];
+    state.settlements = d.settlements || [];
+    state.goals = d.goals || [];
+    state.hhItems = d.hhItems || [];
+    state.hhBills = d.hhBills || [];
+    state.hhBudgets = d.hhBudgets || [];
+    render();
+  }).catch(e => toast(e.message));
+}
+
+/* ==================== HOUSEHOLD MODALS & ACTIONS ==================== */
+function openHouseholdItemModal(existing = null) {
+  const isEdit = !!existing;
+  const today = todayISO();
+  modal(`
+    <h2>${isEdit ? 'Restock / Edit Household Item' : 'Register Household Item'}</h2>
+    <form id="hhItemForm">
+      <div class="form-grid">
+        <div class="field"><label>Item Name *</label><input name="name" required value="${esc(existing?.name || '')}" placeholder="e.g. Cooking Oil, Sugar, Dettol"></div>
+        <div class="field"><label>Category *</label><select name="category" required>${HH_CATEGORIES.map(c => `<option value="${esc(c)}" ${existing?.category === c ? 'selected' : ''}>${esc(c)}</option>`).join('')}</select></div>
+        <div class="field full"><label>Description / Nature of Item</label><input name="description" value="${esc(existing?.description || '')}" placeholder="e.g. 5L Sunfoil Cooking Oil"></div>
+        <div class="field"><label>Quantity Purchased *</label><input name="qtyPurchased" id="fQty" type="number" min="0.01" step="0.01" required value="${existing?.qtyPurchased || 1}"></div>
+        <div class="field"><label>Unit of Measure *</label><select name="unit"><option ${existing?.unit === 'kg' ? 'selected' : ''}>kg</option><option ${existing?.unit === 'litres' ? 'selected' : ''}>litres</option><option ${existing?.unit === 'pieces' ? 'selected' : ''}>pieces</option><option ${existing?.unit === 'packs' ? 'selected' : ''}>packs</option><option ${existing?.unit === 'bottles' ? 'selected' : ''}>bottles</option><option ${existing?.unit === 'cylinders' ? 'selected' : ''}>cylinders</option><option ${existing?.unit === 'units' ? 'selected' : ''}>units</option></select></div>
+        <div class="field"><label>Total Purchase Cost (KES) *</label><input name="totalCost" id="fCost" type="number" min="0" step="0.01" required value="${existing?.totalCost || ''}"></div>
+        <div class="field"><label>Cost per Unit (Auto-calculated)</label><input id="fUnitCost" readonly style="background:#f5f8fa"></div>
+        <div class="field"><label>Date Purchased *</label><input name="purchaseDate" id="fDate" type="date" required value="${isEdit ? today : (existing?.purchaseDate || today)}"></div>
+        <div class="field"><label>Expected Duration (Days) *</label><input name="durationDays" id="fDur" type="number" min="1" required value="${existing?.durationDays || 30}"></div>
+        <div class="field"><label>Expected End Date (Auto-calculated)</label><input id="fEndDate" readonly style="background:#f5f8fa"></div>
+        <div class="field"><label>Current Stock *</label><input name="currentStock" id="fCurStock" type="number" min="0" step="0.01" required value="${existing?.qtyPurchased || 1}"></div>
+        <div class="field"><label>Minimum Stock Level</label><input name="minStock" type="number" min="0" step="0.01" value="${existing?.minStock || 1}"></div>
+        <div class="field"><label>Supplier / Store (optional)</label><input name="supplier" value="${esc(existing?.supplier || '')}" placeholder="e.g. Naivas, Carrefour, Quickmart"></div>
+        <div class="field"><label>Payment Method</label><select name="paymentMethod"><option>M-Pesa</option><option>Cash</option><option>Bank Transfer</option><option>Card</option></select></div>
+        <div class="field"><label>M-Pesa Code (optional)</label><input name="mpesaCode" placeholder="e.g. UKIQZ2CVBC"></div>
+        <div class="field full"><label>Notes</label><input name="notes" value="${esc(existing?.notes || '')}"></div>
+        <div class="field full"><label class="checkline"><input name="logExpense" type="checkbox" checked> Automatically log purchase in Main Expenses Ledger</label></div>
+      </div>
+      <div class="actions">
+        <button class="primary" id="hhItemSubmit">Save & Sync Item</button>
+        <button type="button" class="secondary" onclick="closeModal()">Cancel</button>
+      </div>
+    </form>`);
+
+  const calc = () => {
+    const q = Number($('fQty').value || 0);
+    const c = Number($('fCost').value || 0);
+    const d = Number($('fDur').value || 30);
+    const dt = $('fDate').value || today;
+    $('fUnitCost').value = q > 0 ? money(c / q) : money(0);
+    $('fEndDate').value = addDays(dt, d);
+    if (!isEdit) $('fCurStock').value = q;
+  };
+  ['fQty', 'fCost', 'fDur', 'fDate'].forEach(id => $(id).oninput = calc);
+  calc();
+
+  $('hhItemForm').onsubmit = async e => {
+    e.preventDefault();
+    const btn = $('hhItemSubmit'); btn.disabled = true;
+    const f = new FormData(e.target);
+    const cat = f.get('category');
+    const mainCat = ['Electricity', 'Water', 'Internet', 'Other Utilities'].includes(cat) ? 'Utilities' : 'Basic needs';
+    try {
+      await api('saveHouseholdItem', {
+        id: existing?.id || '',
+        name: f.get('name'),
+        category: cat,
+        description: f.get('description'),
+        qtyPurchased: Number(f.get('qtyPurchased')),
+        unit: f.get('unit'),
+        totalCost: Number(f.get('totalCost')),
+        purchaseDate: f.get('purchaseDate'),
+        durationDays: Number(f.get('durationDays')),
+        currentStock: Number(f.get('currentStock')),
+        minStock: Number(f.get('minStock')),
+        supplier: f.get('supplier'),
+        paymentMethod: f.get('paymentMethod'),
+        mpesaCode: f.get('mpesaCode'),
+        notes: f.get('notes'),
+        logExpense: f.get('logExpense') === 'on',
+        mainCategory: mainCat,
+        mainBucket: bucketFor(mainCat) || 'Needs'
+      });
+      closeModal();
+      toast('Household item saved & synchronized.');
+      refreshAll();
+    } catch (err) { toast(err.message); btn.disabled = false; }
+  };
+}
+
+window.openRestockModal = id => {
+  const item = state.hhItems.find(x => String(x.id) === String(id));
+  if (item) openHouseholdItemModal(item);
+};
+
+window.openUpdateStockModal = id => {
+  const item = state.hhItems.find(x => String(x.id) === String(id));
+  if (!item) return;
+  modal(`
+    <h2>Update Stock Level — ${esc(item.name)}</h2>
+    <form id="stockForm">
+      <div class="field"><label>Current Remaining Stock (${esc(item.unit)}) *</label><input name="currentStock" type="number" min="0" step="0.01" required value="${item.currentStock}"></div>
+      <p class="inline-note">Purchased: ${item.qtyPurchased} ${esc(item.unit)} · Min Alert Threshold: ${item.minStock} ${esc(item.unit)}</p>
+      <div class="actions"><button class="primary">Update Stock</button><button type="button" class="secondary" onclick="closeModal()">Cancel</button></div>
+    </form>`);
+  $('stockForm').onsubmit = async e => {
+    e.preventDefault();
+    try {
+      await api('updateHouseholdStock', { id, currentStock: Number(new FormData(e.target).get('currentStock')) });
+      closeModal();
+      toast('Stock level updated.');
+      refreshAll();
+    } catch (err) { toast(err.message); }
+  };
+};
+
+window.deleteHhItem = async id => {
+  try { await api('deleteHouseholdItem', { id }); toast('Item deleted.'); refreshAll(); } catch (e) { toast(e.message); }
+};
+
+function openHouseholdBillModal() {
+  const today = todayISO();
+  modal(`
+    <h2>Register Recurring Household Bill</h2>
+    <form id="hhBillForm">
+      <div class="form-grid">
+        <div class="field"><label>Bill Name *</label><input name="name" required placeholder="e.g. KPLC Token / Postpaid, Nairobi Water"></div>
+        <div class="field"><label>Category *</label><select name="category"><option>Electricity</option><option>Water</option><option>Internet</option><option>Cooking Gas</option><option>Rent</option><option>Other Utilities</option></select></div>
+        <div class="field"><label>Provider</label><input name="provider" placeholder="e.g. Kenya Power, Safaricom Home Fibre"></div>
+        <div class="field"><label>Account / Meter Number</label><input name="accountNumber" placeholder="Optional"></div>
+        <div class="field"><label>Expected Amount (KES) *</label><input name="expectedAmount" type="number" min="1" step="0.01" required></div>
+        <div class="field"><label>Billing Frequency *</label><select name="frequency"><option>Monthly</option><option>Weekly</option><option>Quarterly</option><option>Annually</option></select></div>
+        <div class="field"><label>Billing Date *</label><input name="billingDate" type="date" required value="${today}"></div>
+        <div class="field"><label>Due Date *</label><input name="dueDate" type="date" required value="${addDays(today, 10)}"></div>
+      </div>
+      <div class="actions"><button class="primary" id="hhBillSubmit">Save Household Bill</button><button type="button" class="secondary" onclick="closeModal()">Cancel</button></div>
+    </form>`);
+
+  $('hhBillForm').onsubmit = async e => {
+    e.preventDefault();
+    const btn = $('hhBillSubmit'); btn.disabled = true;
+    const f = new FormData(e.target);
+    try {
+      await api('saveHouseholdBill', {
+        name: f.get('name'), category: f.get('category'), provider: f.get('provider'),
+        accountNumber: f.get('accountNumber'), expectedAmount: Number(f.get('expectedAmount')),
+        frequency: f.get('frequency'), billingDate: f.get('billingDate'), dueDate: f.get('dueDate')
+      });
+      closeModal();
+      toast('Household bill registered.');
+      refreshAll();
+    } catch (err) { toast(err.message); btn.disabled = false; }
+  };
+}
+
+window.openPayHhBillModal = id => {
+  const b = state.hhBills.map(enrichHouseholdBill).find(x => String(x.id) === String(id));
+  if (!b) return;
+  modal(`
+    <h2>Record Bill Payment — ${esc(b.name)}</h2>
+    <p class="muted">Outstanding Balance: <b>${money(b.balance)}</b> (Supports partial or full settlement; full settlement auto-advances next billing cycle).</p>
+    <form id="payHhBillForm">
+      <div class="form-grid">
+        <div class="field"><label>Amount Paid (KES) *</label><input name="amountPaid" type="number" min="1" step="0.01" required value="${b.balance}"></div>
+        <div class="field"><label>Payment Date *</label><input name="paymentDate" type="date" required value="${todayISO()}"></div>
+        <div class="field"><label>Payment Method</label><select name="paymentMethod"><option>M-Pesa</option><option>Bank Transfer</option><option>Cash</option></select></div>
+        <div class="field"><label>M-Pesa Transaction Code</label><input name="mpesaCode" placeholder="Optional"></div>
+      </div>
+      <div class="actions"><button class="primary" id="payHhBillBtn">Confirm Payment & Sync</button><button type="button" class="secondary" onclick="closeModal()">Cancel</button></div>
+    </form>`);
+
+  $('payHhBillForm').onsubmit = async e => {
+    e.preventDefault();
+    const btn = $('payHhBillBtn'); btn.disabled = true;
+    const f = new FormData(e.target);
+    const mainCat = b.category === 'Rent' ? 'Rent' : 'Utilities';
+    try {
+      await api('payHouseholdBill', {
+        id: b.id, amountPaid: Number(f.get('amountPaid')), paymentDate: f.get('paymentDate'),
+        paymentMethod: f.get('paymentMethod'), mpesaCode: f.get('mpesaCode'),
+        mainCategory: mainCat, mainBucket: bucketFor(mainCat) || 'Needs'
+      });
+      closeModal();
+      toast('Bill payment recorded & ledger synchronized.');
+      refreshAll();
+    } catch (err) { toast(err.message); btn.disabled = false; }
+  };
+};
+
+window.deleteHhBill = async id => {
+  try { await api('deleteHouseholdBill', { id }); toast('Household bill deleted.'); refreshAll(); } catch (e) { toast(e.message); }
+};
+
+/* ==================== EXISTING MODALS & EVENT HANDLERS ==================== */
+const tabTitles = {
+  dashboard: 'Dashboard', household: 'Household Management', income: 'Income Manager',
+  mpesa: 'M-Pesa Entry & Allocation', transactions: 'Transactions', budget: 'Budget Standards',
+  bills: 'Bills Register', unplanned: 'Unplanned Expenses', goals: 'Savings & Goals',
+  reports: 'Reports', settings: 'Settings'
+};
+
+function tab(name) {
+  document.querySelectorAll('.tab-panel').forEach(el => el.classList.toggle('active', el.id === name));
+  document.querySelectorAll('.nav button').forEach(el => el.classList.toggle('active', el.dataset.tab === name));
+  $('pageTitle').textContent = tabTitles[name] || 'My Money';
+  $('sidebar').classList.remove('open');
+}
+
+function modal(html) { $('modal').innerHTML = html; $('modalBg').style.display = 'flex'; }
+function closeModal() { $('modalBg').style.display = 'none'; }
+$('modalBg').addEventListener('click', e => { if (e.target === $('modalBg')) closeModal(); });
+
+function parseCsvLine(line) {
+  let cells = [], cell = '', quoted = false;
+  for (let i = 0; i < line.length; i++) {
+    let ch = line[i];
+    if (ch === '"') { if (quoted && line[i + 1] === '"') { cell += '"'; i++; } else quoted = !quoted; }
+    else if (ch === ',' && !quoted) { cells.push(cell.trim()); cell = ''; }
+    else cell += ch;
+  }
+  cells.push(cell.trim());
+  return cells;
+}
+
+function transactionForm({ type = 'expense', unplanned = false, defaultCategory = '', title = 'Record transaction', includeGoal = true } = {}) {
+  let submitRequestId = 'manual-' + (window.crypto?.randomUUID ? crypto.randomUUID() : Date.now() + '-' + Math.random());
+  modal(`
+    <h2>${esc(title)}</h2>
+    <form id="txForm">
+      <div class="form-grid">
+        <div class="field"><label>Date *</label><input name="date" type="date" required value="${todayISO()}"></div>
+        <div class="field"><label>Amount (KES) *</label><input name="amount" type="number" min=".01" step=".01" required></div>
+        <div class="field"><label>Transaction type *</label><select name="type"><option value="${type}">${type}</option>${type === 'expense' ? '<option value="saving">saving</option><option value="investment">investment</option><option value="income">income</option>' : ''}</select></div>
+        <div class="field"><label>Category *</label><select name="category" required>${state.standards.map(c => `<option value="${esc(c.category)}" ${defaultCategory === c.category ? 'selected' : ''}>${esc(c.category)}</option>`).join('')}</select></div>
+        <div class="field"><label>Household Tag (optional)</label><select name="hhCategory"><option value="">None</option>${HH_CATEGORIES.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('')}</select></div>
+        <div class="field"><label>Payment method</label><input name="paymentMethod" value="M-Pesa"></div>
+        ${includeGoal ? `<div class="field"><label>Link savings/investment goal</label><select name="goalId"><option value="">None</option>${state.goals.map(g => `<option value="${esc(g.id)}">${esc(g.name)}</option>`).join('')}</select></div>` : ''}
+        <div class="field full"><label>Description *</label><input name="description" required></div>
+        <div class="field full"><label>Notes</label><input name="note"></div>
+        <div class="field full"><label class="checkline"><input name="unplanned" type="checkbox" ${unplanned ? 'checked' : ''}> Mark as unplanned expense</label></div>
+      </div>
+      <div class="actions"><button class="primary" id="txSubmit">Save transaction</button><button type="button" class="secondary" onclick="closeModal()">Cancel</button></div>
+    </form>`);
+  $('txForm').onsubmit = async e => {
+    e.preventDefault();
+    const button = $('txSubmit'); if (button.disabled) return; button.disabled = true;
+    const f = new FormData(e.target), cat = f.get('category'), t = f.get('type');
+    try {
+      await api('addTransaction', {
+        requestId: submitRequestId, date: f.get('date'), description: f.get('description'),
+        amount: Number(f.get('amount')), type: t, category: cat, bucket: bucketFor(cat),
+        hhCategory: f.get('hhCategory') || '', paymentMethod: f.get('paymentMethod'),
+        note: f.get('note'), unplanned: f.get('unplanned') === 'on', goalId: f.get('goalId') || ''
+      });
+      closeModal(); toast('Transaction saved.'); refreshAll();
+    } catch (err) { toast(err.message); button.disabled = false; }
+  };
+}
+
+function addBillModal(recurring = false) {
+  const cats = state.standards.map(c => `<option value="${esc(c.category)}">${esc(c.category)}</option>`).join('');
+  modal(`<h2>${recurring ? 'Add recurring bill' : 'Add one-time bill'}</h2><form id="billForm"><div class="form-grid"><div class="field"><label>Bill name *</label><input name="name" required></div><div class="field"><label>Category *</label><select name="category" required>${cats}</select></div><div class="field"><label>Amount (KES) *</label><input name="amount" type="number" min=".01" step=".01" required></div>${recurring ? '<div class="field"><label>Due day of month</label><input name="dueDay" type="number" min="1" max="31" value="1"></div>' : '<div class="field"><label>Due date *</label><input name="dueDate" type="date" required value="' + todayISO() + '"></div>'}<div class="field"><label>Reminder email</label><select name="reminder"><option value="true">Enable</option><option value="false">Disable</option></select></div><div class="field"><label>Budget bucket</label><input name="bucket" readonly></div></div><div class="actions"><button class="primary" id="billSave">Save bill</button><button type="button" class="secondary" onclick="closeModal()">Cancel</button></div></form>`);
+  $('billForm').elements.category.onchange = () => { $('billForm').elements.bucket.value = bucketFor($('billForm').elements.category.value); };
+  $('billForm').elements.bucket.value = bucketFor($('billForm').elements.category.value);
+  $('billForm').onsubmit = async e => {
+    e.preventDefault();
+    const b = $('billSave'); if (b.disabled) return; b.disabled = true;
+    const f = new FormData(e.target), q = { name: f.get('name'), category: f.get('category'), bucket: f.get('bucket'), amount: Number(f.get('amount')), reminderEnabled: f.get('reminder') === 'true' };
+    try {
+      await api(recurring ? 'addRecurringBill' : 'addManualBill', recurring ? { ...q, dueDay: Number(f.get('dueDay')), month: state.month } : { ...q, dueDate: f.get('dueDate'), month: state.month });
+      closeModal(); toast('Bill saved.'); refreshAll();
+    } catch (err) { toast(err.message); b.disabled = false; }
+  };
+}
+
+function addGoalModal() {
+  modal(`<h2>Create savings / investment goal</h2><form id="goalForm"><div class="form-grid"><div class="field full"><label>Goal name *</label><input name="name" required></div><div class="field"><label>Goal type</label><select name="type"><option>Savings</option><option>Investment</option></select></div><div class="field"><label>Target amount (KES) *</label><input name="target" type="number" min="1" step=".01" required></div><div class="field"><label>Initial amount (KES)</label><input name="current" type="number" min="0" step=".01" value="0"></div><div class="field"><label>Target date</label><input name="targetDate" type="date"></div></div><div class="actions"><button class="primary" id="goalSave">Save goal</button><button type="button" class="secondary" onclick="closeModal()">Cancel</button></div></form>`);
+  $('goalForm').onsubmit = async e => {
+    e.preventDefault();
+    const btn = $('goalSave'); if (btn.disabled) return; btn.disabled = true;
+    const f = new FormData(e.target);
+    try { await api('addGoal', { name: f.get('name'), type: f.get('type'), target: Number(f.get('target')), current: Number(f.get('current')), targetDate: f.get('targetDate') }); closeModal(); toast('Goal created.'); refreshAll(); }
+    catch (err) { toast(err.message); btn.disabled = false; }
+  };
+}
+
+function addIncomeSourceModal() {
+  modal(`<h2>Add income source</h2><form id="srcForm"><div class="field"><label>Source name *</label><input name="source" placeholder="e.g. Salary, side business" required></div><div class="actions"><button class="primary" id="srcSave">Save source</button><button type="button" class="secondary" onclick="closeModal()">Cancel</button></div></form>`);
+  $('srcForm').onsubmit = async e => {
+    e.preventDefault();
+    let btn = $('srcSave'); if (btn.disabled) return; btn.disabled = true;
+    try { await api('addIncomeSource', { source: new FormData(e.target).get('source') }); closeModal(); toast('Income source added.'); refreshAll(); }
+    catch (err) { toast(err.message); btn.disabled = false; }
+  };
+}
+
+window.deleteStandard = async i => { try { await api('deleteStandard', { category: state.standards[i].category }); toast('Standard deleted.'); refreshAll(); } catch (e) { toast(e.message); } };
+window.deleteBucket = async i => { try { await api('deleteBucket', { bucket: state.buckets[i].bucket }); toast('Bucket removed.'); refreshAll(); } catch (e) { toast(e.message); } };
+
+/* ==================== WIRE UP EVENT LISTENERS ==================== */
+$('connectBtn').onclick = async () => {
+  const url = $('apiUrl').value.trim(), key = $('apiKey').value.trim();
+  if (!url || !key) { showStatus($('loginStatus'), 'Enter both URL and access key.', false); return; }
+  localStorage.setItem('myMoneyUrl', url); localStorage.setItem('myMoneyKey', key);
+  try {
+    await api('saveConnectionSettings', { url, newKey: key });
+    setView();
+    refreshAll();
+  } catch (e) { showStatus($('loginStatus'), e.message, false); }
+};
+
+$('refreshBtn').onclick = () => { refreshAll(); toast('Synchronized with Google Sheets'); };
+$('period').value = state.month;
+$('period').onchange = () => { state.month = $('period').value; refreshAll(); };
+document.querySelectorAll('.nav button').forEach(b => b.onclick = () => tab(b.dataset.tab));
+$('menuBtn').onclick = () => $('sidebar').classList.toggle('open');
+
+// Household Sub-tabs & Quick Actions
+document.querySelectorAll('.subtab-btn').forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll('.subtab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.subpanel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    $(btn.dataset.hhsub).classList.add('active');
+  };
+});
+
+$('hhQuickAddItem').onclick = () => openHouseholdItemModal();
+$('hhAddItemBtn').onclick = () => openHouseholdItemModal();
+$('hhQuickAddBill').onclick = () => openHouseholdBillModal();
+$('hhAddBillBtn').onclick = () => openHouseholdBillModal();
+$('hhQuickMpesa').onclick = () => tab('mpesa');
+
+['hhItemSearch', 'hhItemCatFilter', 'hhItemStatusFilter', 'hhItemSort'].forEach(id => {
+  $(id).oninput = () => { state.hhPage = 1; renderHouseholdModule(); };
+});
+['hhBillSearch', 'hhBillStatusFilter'].forEach(id => {
+  $(id).oninput = () => renderHouseholdModule();
+});
+['txSearch', 'txTypeFilter'].forEach(id => {
+  $(id).oninput = () => renderTransactions();
+});
+
+$('saveHhBudgetsBtn').onclick = async () => {
+  const budgets = Array.from(document.querySelectorAll('.hhBudgetInput')).map(inp => ({
+    category: inp.dataset.cat,
+    amount: Number(inp.value || 0)
+  }));
+  try {
+    await api('saveHouseholdBudgets', { budgets });
+    toast('Household budgets saved.');
+    refreshAll();
+  } catch (e) { toast(e.message); }
+};
+
+// M-Pesa Form & Household Linkage
+$('parseBtn').onclick = () => {
+  try {
+    state.parsed = parseMpesa($('mpesaText').value);
+    const p = state.parsed;
+    $('pCode').textContent = p.code || 'No transaction code found';
+    $('pAmount').textContent = money(p.amount);
+    $('pRecipient').textContent = p.recipient;
+    $('pDate').textContent = p.date + ' ' + p.time;
+    $('pType').textContent = p.type;
+    $('mpesaType').value = p.type;
+    $('mpesaPreview').classList.remove('hidden');
+    $('submitMpesa').disabled = false;
+    hideStatus($('parseStatus'));
+  } catch (e) {
+    state.parsed = null;
+    showStatus($('parseStatus'), e.message, false);
+    $('mpesaPreview').classList.add('hidden');
+    $('submitMpesa').disabled = true;
+  }
+};
+
+$('clearMpesa').onclick = () => {
+  $('mpesaText').value = ''; $('mpesaCategory').value = ''; $('mpesaGoal').value = '';
+  $('mpesaIncomeSource').value = ''; $('mpesaHhCategory').value = ''; $('mpesaHhBill').value = '';
+  $('mpesaHhItem').value = ''; $('mpesaHhQty').value = ''; $('mpesaType').value = 'expense';
+  $('mpesaNote').value = ''; state.parsed = null; $('mpesaPreview').classList.add('hidden');
+  $('submitMpesa').disabled = true; hideStatus($('parseStatus'));
+};
+
+$('mpesaCategory').onchange = () => { $('mpesaBucket').value = bucketFor($('mpesaCategory').value); };
+
+$('mpesaHhBill').onchange = () => {
+  const billId = $('mpesaHhBill').value;
+  if (!billId) return;
+  const b = state.hhBills.find(x => String(x.id) === String(billId));
+  if (b) {
+    $('mpesaHhCategory').value = b.category;
+    if (!$('mpesaCategory').value) {
+      $('mpesaCategory').value = b.category === 'Rent' ? 'Rent' : 'Utilities';
+      $('mpesaBucket').value = bucketFor($('mpesaCategory').value);
+    }
+  }
+};
+
+$('mpesaHhItem').onchange = () => {
+  const itemId = $('mpesaHhItem').value;
+  if (!itemId) return;
+  const it = state.hhItems.find(x => String(x.id) === String(itemId));
+  if (it) {
+    $('mpesaHhCategory').value = it.category;
+    if (!$('mpesaCategory').value) {
+      $('mpesaCategory').value = 'Basic needs';
+      $('mpesaBucket').value = bucketFor('Basic needs');
+    }
+  }
+};
+
+$('mpesaForm').onsubmit = async e => {
+  e.preventDefault();
+  const btn = $('submitMpesa');
+  if (btn.disabled || state.submitting || !state.parsed || !$('mpesaCategory').value) return;
+  state.submitting = true; btn.disabled = true;
+  const p = state.parsed, cat = $('mpesaCategory').value;
+  const hhQty = $('mpesaHhQty').value;
+  const extraNote = hhQty ? `Restocked ${hhQty} units. ${$('mpesaNote').value}` : $('mpesaNote').value;
+
+  try {
+    await api('addTransaction', {
+      requestId: p.requestId, date: p.date, description: p.recipient, amount: p.amount,
+      type: $('mpesaType').value, category: cat, bucket: bucketFor(cat), paymentMethod: 'M-Pesa',
+      incomeSource: $('mpesaIncomeSource').value, mpesaCode: p.code, mpesaTime: p.time,
+      rawMessage: p.raw, note: extraNote, goalId: $('mpesaGoal').value || '', unplanned: false,
+      hhCategory: $('mpesaHhCategory').value || '',
+      hhBillId: $('mpesaHhBill').value || '',
+      hhItemId: $('mpesaHhItem').value || '',
+      hhQtyNote: hhQty ? `${hhQty} units` : ''
+    });
+    showStatus($('parseStatus'), 'Saved & synchronized across Main Ledger, Bills, and Household Management.');
+    $('clearMpesa').click();
+    refreshAll();
+  } catch (err) { showStatus($('parseStatus'), err.message, false); btn.disabled = false; }
+  finally { state.submitting = false; }
+};
+
+// Income Form
+let incomeRequestId = 'income-' + (window.crypto?.randomUUID ? crypto.randomUUID() : Date.now() + '-' + Math.random());
+$('incomeForm').onsubmit = async e => {
+  e.preventDefault();
+  const btn = $('saveIncome'); if (btn.disabled) return; btn.disabled = true;
+  try {
+    await api('addTransaction', {
+      requestId: incomeRequestId, date: $('incomeDate').value, description: $('incomeDescription').value,
+      amount: Number($('incomeAmount').value), type: 'income', category: $('incomeCategory').value,
+      bucket: '', paymentMethod: $('incomeMethod').value, incomeSource: $('incomeSource').value,
+      note: $('incomeNote').value
+    });
+    showStatus($('incomeStatus'), 'Income saved & synchronized across Dashboard and Reports.');
+    e.target.reset();
+    incomeRequestId = 'income-' + (window.crypto?.randomUUID ? crypto.randomUUID() : Date.now() + '-' + Math.random());
+    $('incomeDate').value = todayISO();
+    refreshAll();
+  } catch (err) { showStatus($('incomeStatus'), err.message, false); }
+  finally { btn.disabled = false; }
+};
+
+$('incomeDate').value = todayISO();
+$('manualAdd').onclick = () => transactionForm();
+$('addUnplanned').onclick = () => transactionForm({ unplanned: true, title: 'Record unplanned expense' });
+
+$('addStandard').onclick = () => {
+  modal(`<h2>Add expenditure category</h2><form id="stdForm"><div class="field"><label>Category *</label><input name="category" required></div><div class="field" style="margin-top:10px"><label>Budget bucket *</label><select name="bucket" required>${state.buckets.map(b => `<option value="${esc(b.bucket)}">${esc(b.bucket)}</option>`).join('')}</select></div><div class="field" style="margin-top:10px"><label>Monthly standard</label><input name="amount" type="number" min="0" value="0"></div><div class="actions"><button class="primary">Save category</button><button type="button" class="secondary" onclick="closeModal()">Cancel</button></div></form>`);
+  $('stdForm').onsubmit = async e => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    try { await api('addStandard', { category: f.get('category'), bucket: f.get('bucket'), amount: Number(f.get('amount')) }); closeModal(); toast('Category added.'); refreshAll(); } catch (err) { toast(err.message); }
+  };
+};
+
+$('saveStandards').onclick = async () => {
+  const items = state.standards.map((x, i) => ({ ...x, amount: Number(document.querySelector(`.stdAmount[data-i="${i}"]`).value) }));
+  try { await api('updateStandards', { standards: items }); refreshAll(); toast('Budget standards saved.'); } catch (e) { toast(e.message); }
+};
+
+$('addManualBill').onclick = () => addBillModal(false);
+$('addBill').onclick = () => addBillModal(true);
+$('importBills').onclick = () => $('billCsvUpload').click();
+$('billCsvUpload').onchange = async e => {
+  const file = e.target.files && e.target.files[0]; if (!file) return;
+  try {
+    const lines = (await file.text()).split(/\r?\n/).filter(x => x.trim());
+    if (lines.length < 2) throw Error('CSV has no bill rows.');
+    const headers = parseCsvLine(lines[0]).map(x => x.toLowerCase().replace(/[ _-]/g, ''));
+    const findHeader = (...names) => headers.findIndex(h => names.includes(h));
+    const nameI = findHeader('name', 'billname', 'description'), catI = findHeader('category'), amountI = findHeader('amount', 'amountkes', 'amountksh'), dueI = findHeader('duedate', 'date'), bucketI = findHeader('bucket');
+    if (nameI < 0 || catI < 0 || amountI < 0 || dueI < 0) throw Error('CSV headers required: Name, Category, Amount, Due Date.');
+    let imported = 0;
+    for (let i = 1; i < lines.length; i++) {
+      const row = parseCsvLine(lines[i]); if (!row.some(x => x.trim())) continue;
+      let due = row[dueI] || '';
+      if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(due)) { let p = due.split('/'); due = `${p[2]}-${p[0].padStart(2, '0')}-${p[1].padStart(2, '0')}`; }
+      await api('addManualBill', { name: row[nameI], category: row[catI], amount: Number(String(row[amountI]).replace(/,/g, '')), dueDate: due, month: due.slice(0, 7), bucket: bucketI >= 0 ? row[bucketI] : bucketFor(row[catI]) });
+      imported++;
+    }
+    refreshAll(); toast(`Imported ${imported} bill(s).`);
+  } catch (err) { toast(err.message); } finally { e.target.value = ''; }
+};
+
+$('reminderSetup').onclick = async () => {
+  const btn = $('reminderSetup'); btn.disabled = true;
+  try { let d = await api('installBillReminders'); showStatus($('billStatus'), d.message || 'Daily bill reminder installed.'); }
+  catch (e) { showStatus($('billStatus'), e.message, false); } finally { btn.disabled = false; }
+};
+
+$('addGoal').onclick = addGoalModal;
+$('goalContribution').onclick = () => transactionForm({ type: 'saving', title: 'Contribute to a savings goal' });
+$('addIncomeSource').onclick = addIncomeSourceModal;
+$('manageSources').onclick = addIncomeSourceModal;
+
+$('addBucket').onclick = () => {
+  modal(`<h2>Add budget bucket</h2><form id="bucketForm"><div class="field"><label>Bucket name *</label><input name="bucket" required></div><div class="field" style="margin-top:10px"><label>Allocation percent *</label><input name="percent" type="number" min="0" max="100" required></div><div class="field" style="margin-top:10px"><label>Includes</label><input name="includes"></div><div class="actions"><button class="primary">Save bucket</button><button type="button" class="secondary" onclick="closeModal()">Cancel</button></div></form>`);
+  $('bucketForm').onsubmit = async e => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    try { await api('addBucket', { bucket: f.get('bucket'), percent: Number(f.get('percent')), includes: f.get('includes') }); closeModal(); toast('Bucket added.'); refreshAll(); } catch (err) { toast(err.message); }
+  };
+};
+
+$('saveBuckets').onclick = async () => {
+  const bs = state.buckets.map((b, i) => ({ ...b, bucket: document.querySelector(`.bucketName[data-i="${i}"]`).value, percent: Number(document.querySelector(`.bucketPercent[data-i="${i}"]`).value), includes: document.querySelector(`.bucketIncludes[data-i="${i}"]`).value }));
+  const total = bs.reduce((a, b) => a + Number(b.percent || 0), 0);
+  if (Math.abs(total - 100) > .01) { toast('Budget allocations must total 100%. Current: ' + total + '%.'); return; }
+  try { await api('saveBuckets', { buckets: bs }); refreshAll(); toast('Allocation saved.'); } catch (e) { toast(e.message); }
+};
+
+$('saveConnection').onclick = async () => {
+  const url = $('settingsUrl').value.trim();
+  const key = $('settingsKey').value.trim();
+  try {
+    await api('saveConnectionSettings', { url, newKey: key });
+    localStorage.setItem('myMoneyUrl', url);
+    localStorage.setItem('myMoneyKey', key);
+    updateMagicLinkDisplay(url, key);
+    refreshAll();
+    toast('URL & Access Key saved to Google Sheet Settings tab and synced.');
+  } catch (e) {
+    toast(e.message);
+  }
+};
+
+$('copyMagicLink').onclick = () => {
+  const inp = $('magicSyncLink');
+  inp.select();
+  inp.setSelectionRange(0, 99999);
+  navigator.clipboard?.writeText(inp.value).catch(() => document.execCommand('copy'));
+  toast('Cross-device Magic Sync Link copied! Open it on any device to auto-connect.');
+};
+
+$('disconnect').onclick = () => {
+  localStorage.removeItem('myMoneyUrl');
+  localStorage.removeItem('myMoneyKey');
+  setView();
+  toast('Disconnected from this browser.');
+};
+
+setView();
+if (getConn().url && getConn().key) refreshAll();
 </script>
-</body></html>
+</body>
+</html>
