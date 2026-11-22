@@ -515,6 +515,12 @@ html,body,*{font-family:'Poppins',sans-serif!important}
                     <input id="mpesaHhQty" type="number" min="0" step="0.01" placeholder="e.g. 5">
                   </div>
                 </div>
+                <div style="margin-top:12px;border-top:1px solid var(--line);padding-top:12px">
+                  <label class="checkline"><input type="checkbox" id="mpesaBulkMode"> This M-Pesa payment covers multiple household items (bulk pay)</label>
+                  <p class="inline-note">Select each item and enter the amount allocated to it. All allocations will be reconciled under the same M-Pesa transaction ID.</p>
+                  <div id="mpesaBulkItems" class="hidden" style="display:grid;gap:8px;margin-top:10px"></div>
+                  <div id="mpesaBulkTotal" class="inline-note hidden"></div>
+                </div>
               </div>
 
               <div class="form-grid" style="margin-top:10px">
@@ -1372,6 +1378,24 @@ function refreshSelects() {
   $('mpesaHhCategory').innerHTML = '<option value="">Not a household expense</option>' + hhCatOpts;
   $('mpesaHhBill').innerHTML = '<option value="">None</option>' + state.hhBills.map(b => `<option value="${esc(b.id)}">${esc(b.name)} (Bal: ${money(b.balance)})</option>`).join('');
   $('mpesaHhItem').innerHTML = '<option value="">None</option>' + state.hhItems.map(i => `<option value="${esc(i.id)}">${esc(i.name)} (${i.currentStock} ${esc(i.unit)})</option>`).join('');
+  renderMpesaBulkItems();
+}
+
+function renderMpesaBulkItems() {
+  const host = $('mpesaBulkItems');
+  if (!host) return;
+  host.innerHTML = state.hhItems.map(i => `<div class="bucket" style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(90px,.8fr) minmax(80px,.6fr);gap:9px;align-items:center;padding:9px">
+    <label class="checkline"><input type="checkbox" class="mpesaBulkPick" data-id="${esc(i.id)}"> <span><b>${esc(i.name)}</b><small class="muted" style="display:block">${esc(i.category)} · Stock ${Number(i.currentStock||0)} ${esc(i.unit)}</small></span></label>
+    <input class="mpesaBulkAmount" data-id="${esc(i.id)}" type="number" min="0" step="0.01" placeholder="Amount (KES)" disabled>
+    <input class="mpesaBulkQty" data-id="${esc(i.id)}" type="number" min="0" step="0.01" placeholder="Qty" disabled>
+  </div>`).join('') || '<div class="empty">No household items available.</div>';
+}
+
+function getMpesaBulkAllocations() {
+  return [...document.querySelectorAll('.mpesaBulkPick:checked')].map(ch => {
+    const id = ch.dataset.id;
+    return {itemId:id, amount:Number(document.querySelector(`.mpesaBulkAmount[data-id="${CSS.escape(id)}"]`)?.value||0), quantity:Number(document.querySelector(`.mpesaBulkQty[data-id="${CSS.escape(id)}"]`)?.value||0)};
+  });
 }
 
 function renderHouseholdPlanner() {
@@ -1796,7 +1820,7 @@ $('parseBtn').onclick = () => {
 $('clearMpesa').onclick = () => {
   $('mpesaText').value = ''; $('mpesaCategory').value = ''; $('mpesaGoal').value = '';
   $('mpesaIncomeSource').value = ''; $('mpesaHhCategory').value = ''; $('mpesaHhBill').value = '';
-  $('mpesaHhItem').value = ''; $('mpesaHhQty').value = ''; $('mpesaType').value = 'expense';
+  $('mpesaHhItem').value = ''; $('mpesaHhQty').value = ''; $('mpesaBulkMode').checked = false; $('mpesaBulkMode').dispatchEvent(new Event('change')); document.querySelectorAll('.mpesaBulkPick').forEach(x=>x.checked=false); document.querySelectorAll('.mpesaBulkAmount,.mpesaBulkQty').forEach(x=>{x.value='';x.disabled=true;}); $('mpesaType').value = 'expense';
   $('mpesaNote').value = ''; state.parsed = null; $('mpesaPreview').classList.add('hidden');
   $('submitMpesa').disabled = true; hideStatus($('parseStatus'));
 };
@@ -1829,6 +1853,24 @@ $('mpesaHhItem').onchange = () => {
   }
 };
 
+$('mpesaBulkMode').onchange = () => {
+  const bulk = $('mpesaBulkMode').checked;
+  $('mpesaBulkItems').classList.toggle('hidden', !bulk);
+  $('mpesaBulkTotal').classList.toggle('hidden', !bulk);
+  $('mpesaHhItem').disabled = bulk;
+  $('mpesaHhQty').disabled = bulk;
+};
+document.addEventListener('change', e => {
+  if (e.target.matches('.mpesaBulkPick')) {
+    const id=e.target.dataset.id;
+    document.querySelectorAll(`.mpesaBulkAmount[data-id="${CSS.escape(id)}"],.mpesaBulkQty[data-id="${CSS.escape(id)}"]`).forEach(el=>el.disabled=!e.target.checked);
+  }
+  if (e.target.matches('.mpesaBulkPick,.mpesaBulkAmount')) {
+    const total=getMpesaBulkAllocations().reduce((sum,a)=>sum+a.amount,0);
+    $('mpesaBulkTotal').textContent=`Allocated: ${money(total)} of ${money(state.parsed?.amount||0)} payment`;
+  }
+});
+
 $('mpesaForm').onsubmit = async e => {
   e.preventDefault();
   const btn = $('submitMpesa');
@@ -1846,8 +1888,9 @@ $('mpesaForm').onsubmit = async e => {
       rawMessage: p.raw, note: extraNote, goalId: $('mpesaGoal').value || '', unplanned: false,
       hhCategory: $('mpesaHhCategory').value || '',
       hhBillId: $('mpesaHhBill').value || '',
-      hhItemId: $('mpesaHhItem').value || '',
-      hhQtyNote: hhQty ? `${hhQty} units` : ''
+      hhItemId: $('mpesaBulkMode').checked ? '' : ($('mpesaHhItem').value || ''),
+      hhQtyNote: hhQty ? `${hhQty} units` : '',
+      hhItemAllocations: $('mpesaBulkMode').checked ? getMpesaBulkAllocations() : []
     });
     showStatus($('parseStatus'), 'Saved & synchronized across Main Ledger, Bills, and Household Management.');
     $('clearMpesa').click();
