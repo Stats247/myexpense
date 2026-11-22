@@ -1738,7 +1738,7 @@ window.deleteBucket = async i => { try { await api('deleteBucket', { bucket: sta
 $('connectBtn').onclick = async () => {
   const key = $('apiKey').value.trim();
   if (!key) { showStatus($('loginStatus'), 'Enter your Private Key.', false); return; }
-  const bootstrapUrl = 'https://script.google.com/macros/s/AKfycby-M0Slv3y98U0TyLXK8fxvGmnemwudmwtN9_510RTlFNrF-xjsAvO4FyCbos8DBQc/exec';
+  const bootstrapUrl = 'https://script.google.com/macros/s/AKfycbzTJt5bKNB8j6EtEBuPqqhjLjn7EG6R4E8vyw4YSXOMFsW1mxadUfn8fz9JCq5--zT6/exec';
   try {
     const response = await fetch(bootstrapUrl, { method:'POST', redirect:'follow', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify({action:'getData',key}) });
     const raw = await response.text(); let payload; try { payload=JSON.parse(raw); } catch { throw Error('Connection endpoint returned invalid data.'); }
