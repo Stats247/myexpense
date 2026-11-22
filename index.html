@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <title>My Money | Personal & Household Finance Manager</title>
 <style>
 :root{
@@ -11,8 +12,9 @@
   --shadow:0 7px 25px rgba(20,52,73,.07);
 }
 *{box-sizing:border-box}
-body{margin:0;background:#f3f7f9;color:var(--ink);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+body{margin:0;background:#f3f7f9;color:var(--ink);font:14px/1.5 Poppins,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
 button,input,select,textarea{font:inherit}
+*{font-family:Poppins,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
 button{cursor:pointer;border:0;border-radius:10px;padding:10px 14px;font-weight:700;transition:.15s}
 button:hover{filter:brightness(.97);transform:translateY(-1px)}
 button:disabled{opacity:.5;cursor:not-allowed;transform:none}
@@ -22,14 +24,14 @@ button:disabled{opacity:.5;cursor:not-allowed;transform:none}
 .warn-btn{background:#fff3df;color:var(--amber)}
 .small{padding:6px 10px;font-size:12px}
 .app{display:flex;min-height:100vh}
-.sidebar{width:256px;background:linear-gradient(165deg,#174a9b,#176b50);color:#fff;flex:0 0 256px;padding:23px 15px;display:flex;flex-direction:column}
+.sidebar{width:256px;background:#1457d9;color:#fff;flex:0 0 256px;padding:23px 15px;display:flex;flex-direction:column}
 .brand{font-size:23px;font-weight:850;letter-spacing:.7px;padding:8px 11px 24px;color:#fff}
-.brand small{display:block;font-size:10px;letter-spacing:1.6px;color:#a9d7cd;font-weight:600}
+.brand small{display:block;font-size:10px;letter-spacing:1.6px;color:#dbeafe;font-weight:600}
 .nav{display:grid;gap:5px}
-.nav button{text-align:left;color:#d3e6e1;background:transparent;padding:11px 13px;font-size:13px;border-radius:10px;display:flex;align-items:center;justify-content:space-between}
-.nav button:hover,.nav button.active{background:#247a6d;color:#fff}
+.nav button{text-align:left;color:#fff;background:transparent;padding:11px 13px;font-size:13px;border-radius:10px;display:flex;align-items:center;justify-content:space-between}
+.nav button:hover,.nav button.active{background:#0d43b5;color:#fff}
 .nav-badge{background:#c44747;color:#fff;font-size:10px;padding:2px 7px;border-radius:99px;font-weight:800}
-.sidebar-foot{margin-top:auto;border-top:1px solid #ffffff26;padding:16px 10px 5px;color:#b7d7d0;font-size:12px;line-height:1.8}
+.sidebar-foot{margin-top:auto;border-top:1px solid #ffffff26;padding:16px 10px 5px;color:#dbeafe;font-size:12px;line-height:1.8}
 .main{flex:1;min-width:0}
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#fff;border-bottom:1px solid var(--line);padding:18px 28px;position:sticky;top:0;z-index:5}
 .topbar h1{font-size:21px;margin:0;color:#183e4c}
@@ -122,6 +124,15 @@ button:disabled{opacity:.5;cursor:not-allowed;transform:none}
 @media(max-width:1100px){.cards,.cards-5{grid-template-columns:repeat(2,minmax(0,1fr))}.section-grid,.section-grid-even{grid-template-columns:1fr}.sidebar{width:225px;flex-basis:225px}}
 @media(max-width:720px){.app{display:block}.sidebar{display:none;width:auto;flex-basis:auto}.sidebar.open{display:block}.nav{grid-template-columns:repeat(2,1fr)}.nav button{font-size:12px;padding:9px}.mobile-menu{display:inline-block}.topbar{padding:13px}.topbar h1{font-size:18px}.content{padding:13px}.cards,.cards-5{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.card{padding:13px}.metric{font-size:19px}.form-grid,.form-grid-3{grid-template-columns:1fr}.field.full{grid-column:auto}.mini-cards{grid-template-columns:1fr 1fr}}
 @media(max-width:430px){.cards,.cards-5{grid-template-columns:1fr}.top-actions{width:100%}.period{flex:1}}
+
+/* My Money visual refresh: Poppins + solid blue navigation */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+html,body,*{font-family:'Poppins',sans-serif!important}
+.sidebar{background:#1457d9!important;color:#fff!important}
+.nav button{background:transparent!important;color:#fff!important;font-family:'Poppins',sans-serif!important;font-weight:500}
+.nav button:hover{background:#2f70ed!important;color:#fff!important}
+.nav button.active{background:#0b43b5!important;color:#fff!important;box-shadow:inset 3px 0 0 #fff}
+.brand small,.sidebar-foot{color:#e6efff!important}
 </style>
 </head>
 <body>
@@ -202,6 +213,7 @@ button:disabled{opacity:.5;cursor:not-allowed;transform:none}
             <button class="subtab-btn" data-hhsub="hh-bills">Household Bills</button>
             <button class="subtab-btn" data-hhsub="hh-budgets">Household Budgets</button>
             <button class="subtab-btn" data-hhsub="hh-replenish">Replenishment List</button>
+            <button class="subtab-btn" data-hhsub="hh-planner">Family Planner</button>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <button class="primary small" id="hhQuickAddItem">＋ Quick Add Item</button>
@@ -243,6 +255,22 @@ button:disabled{opacity:.5;cursor:not-allowed;transform:none}
               <div id="hhForecastList" class="bucket-list"></div>
             </div>
           </div>
+        </div>
+
+        <div class="subpanel" id="hh-planner">
+          <div class="grid cards-5" style="margin-bottom:16px">
+            <div class="card metric-card"><div class="metric-label">Planned items</div><div class="metric" id="planTotal">0</div><div class="metric-foot">All household plans</div></div>
+            <div class="card metric-card"><div class="metric-label">Due today</div><div class="metric" id="planToday">0</div><div class="metric-foot">Tasks and activities</div></div>
+            <div class="card metric-card"><div class="metric-label">Completed</div><div class="metric" id="planDone">0</div><div class="metric-foot">Completed plans</div></div>
+            <div class="card metric-card"><div class="metric-label">Upcoming cost</div><div class="metric" id="planCost">KES 0</div><div class="metric-foot">Planned estimated spend</div></div>
+            <div class="card metric-card"><div class="metric-label">High priority</div><div class="metric" id="planUrgent">0</div><div class="metric-foot">Needs attention</div></div>
+          </div>
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><div><h2 style="margin-bottom:4px">Family & Household Planner</h2><p class="muted">Coordinate chores, meal planning, shopping, maintenance and family events in one shared schedule.</p></div><button class="primary" id="addPlanBtn">＋ Add to planner</button></div>
+            <div class="toolbar"><select id="planTypeFilter"><option value="">All plan types</option><option>Task</option><option>Meal</option><option>Shopping</option><option>Maintenance</option><option>Event</option></select><select id="planStatusFilter"><option value="">All statuses</option><option>Planned</option><option>In Progress</option><option>Completed</option><option>Skipped</option></select><input id="planSearch" placeholder="Search title or assigned person..."></div>
+            <div class="table-wrap"><table class="table"><thead><tr><th>Date</th><th>Type</th><th>Plan / Activity</th><th>Assigned to</th><th>Priority</th><th>Est. cost</th><th>Status</th><th>Actions</th></tr></thead><tbody id="plannerRows"></tbody></table></div>
+          </div>
+          <div class="grid section-grid-even"><div class="card"><h2>Planner tips</h2><div class="bucket-list"><div class="bucket">Plan meals for the week to reduce repeat shopping and food waste.</div><div class="bucket">Assign recurring chores fairly and mark them complete as they are done.</div><div class="bucket">Schedule appliance servicing and home maintenance before breakdowns occur.</div></div></div><div class="card"><h2>Smart household budget</h2><p class="muted">Estimated costs from upcoming plans help you anticipate shopping, maintenance and event spending before it happens.</p><div class="metric" id="planUpcomingCost">KES 0</div><div class="metric-foot">Upcoming estimated cost for the next 30 days</div></div></div>
         </div>
 
         <!-- HH Sub-tab 2: Consumables & Inventory -->
@@ -633,7 +661,7 @@ const HH_BUDGET_CATEGORIES = [
 let state = {
   transactions: [], standards: [], buckets: [], incomeSources: [],
   recurringBills: [], monthlyBills: [], settlements: [], goals: [],
-  hhItems: [], hhBills: [], hhBudgets: [],
+  hhItems: [], hhBills: [], hhBudgets: [], householdPlans: [],
   month: new Date().toISOString().slice(0, 7),
   parsed: null, submitting: false,
   hhPage: 1, hhPageSize: 10
@@ -839,6 +867,7 @@ function render() {
   renderIncomeSources();
   renderIncomeTab(s);
   renderHouseholdModule();
+  renderHouseholdPlanner();
   refreshSelects();
 }
 
@@ -1345,6 +1374,30 @@ function refreshSelects() {
   $('mpesaHhItem').innerHTML = '<option value="">None</option>' + state.hhItems.map(i => `<option value="${esc(i.id)}">${esc(i.name)} (${i.currentStock} ${esc(i.unit)})</option>`).join('');
 }
 
+function renderHouseholdPlanner() {
+  const plans = state.householdPlans || [], today = todayISO();
+  const open = plans.filter(p => p.status !== 'Completed' && p.status !== 'Skipped');
+  const due = open.filter(p => p.date === today);
+  const completed = plans.filter(p => p.status === 'Completed');
+  const urgent = open.filter(p => ['High','Urgent'].includes(p.priority));
+  const upcoming = open.filter(p => p.date >= today && p.date <= addDays(today,30));
+  $('planTotal').textContent = plans.length; $('planToday').textContent = due.length;
+  $('planDone').textContent = completed.length; $('planUrgent').textContent = urgent.length;
+  $('planCost').textContent = money(open.reduce((a,p)=>a+Number(p.estimatedCost||0),0));
+  $('planUpcomingCost').textContent = money(upcoming.reduce((a,p)=>a+Number(p.estimatedCost||0),0));
+  const type = $('planTypeFilter')?.value || '', status = $('planStatusFilter')?.value || '', search = ($('planSearch')?.value || '').toLowerCase();
+  const filtered = plans.filter(p => (!type || p.type === type) && (!status || p.status === status) && (!search || `${p.title} ${p.assignedTo} ${p.notes}`.toLowerCase().includes(search))).sort((a,b)=>String(a.date).localeCompare(String(b.date)));
+  $('plannerRows').innerHTML = filtered.map(p => `<tr><td>${fmtShortDate(p.date)}</td><td><span class="pill">${esc(p.type)}</span></td><td><b>${esc(p.title)}</b><div class="inline-note">${esc(p.notes||'')}</div></td><td>${esc(p.assignedTo||'—')}</td><td><span class="pill ${p.priority==='Urgent'?'orange':p.priority==='High'?'warn':''}">${esc(p.priority)}</span></td><td>${money(p.estimatedCost)}</td><td><span class="pill ${p.status==='Completed'?'':p.status==='In Progress'?'warn':''}">${esc(p.status)}</span></td><td><button class="secondary small" onclick="editHouseholdPlan('${esc(p.id)}')">Edit</button> <button class="secondary small" onclick="completeHouseholdPlan('${esc(p.id)}','${p.status==='Completed'?'Planned':'Completed'}')">${p.status==='Completed'?'Reopen':'Complete'}</button> <button class="danger small" onclick="deleteHouseholdPlan('${esc(p.id)}')">Delete</button></td></tr>`).join('') || '<tr><td colspan="8" class="empty">No plans yet. Add your first household activity.</td></tr>';
+}
+function openHouseholdPlanModal(existing=null) {
+  const p=existing||{};
+  modal(`<h2>${p.id?'Edit household plan':'Add household plan'}</h2><form id="planForm"><div class="form-grid"><div class="field"><label>Plan type *</label><select name="type">${['Task','Meal','Shopping','Maintenance','Event'].map(x=>`<option ${p.type===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="field"><label>Date *</label><input type="date" name="date" required value="${esc(p.date||todayISO())}"></div><div class="field full"><label>Title / activity *</label><input name="title" required value="${esc(p.title||'')}" placeholder="e.g. Weekly grocery shopping, service water pump"></div><div class="field"><label>Assigned to</label><input name="assignedTo" value="${esc(p.assignedTo||'')}" placeholder="Family member"></div><div class="field"><label>Priority</label><select name="priority">${['Low','Normal','High','Urgent'].map(x=>`<option ${p.priority===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="field"><label>Estimated cost (KES)</label><input type="number" min="0" step="0.01" name="estimatedCost" value="${Number(p.estimatedCost||0)}"></div><div class="field"><label>Repeat</label><select name="repeat">${['None','Daily','Weekly','Monthly','Yearly'].map(x=>`<option ${p.repeat===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="field"><label>Status</label><select name="status">${['Planned','In Progress','Completed','Skipped'].map(x=>`<option ${p.status===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="field full"><label>Notes / details</label><textarea name="notes" placeholder="Shopping list, recipe, maintenance details, reminders...">${esc(p.notes||'')}</textarea></div></div><div class="actions"><button class="primary" id="planSaveBtn">Save plan</button><button type="button" class="secondary" onclick="closeModal()">Cancel</button></div></form>`);
+  $('planForm').onsubmit=async e=>{e.preventDefault();const btn=$('planSaveBtn');btn.disabled=true;const f=new FormData(e.target);try{await api('saveHouseholdPlan',{id:p.id||'',type:f.get('type'),date:f.get('date'),title:f.get('title'),assignedTo:f.get('assignedTo'),priority:f.get('priority'),estimatedCost:Number(f.get('estimatedCost')||0),repeat:f.get('repeat'),status:f.get('status'),notes:f.get('notes')});closeModal();toast('Household plan saved.');refreshAll();}catch(err){toast(err.message);btn.disabled=false;}};
+}
+window.editHouseholdPlan=id=>{const p=state.householdPlans.find(x=>String(x.id)===String(id));if(p)openHouseholdPlanModal(p);};
+window.completeHouseholdPlan=async(id,status)=>{try{await api('updateHouseholdPlanStatus',{id,status});toast('Planner status updated.');refreshAll();}catch(e){toast(e.message);}};
+window.deleteHouseholdPlan=async id=>{if(!confirm('Delete this household plan?'))return;try{await api('deleteHouseholdPlan',{id});toast('Plan deleted.');refreshAll();}catch(e){toast(e.message);}};
+
 function refreshAll() {
   api('getData', { month: state.month }).then(d => {
     if (d.connection && d.connection.url && d.connection.key) {
@@ -1365,6 +1418,7 @@ function refreshAll() {
     state.hhItems = d.hhItems || [];
     state.hhBills = d.hhBills || [];
     state.hhBudgets = d.hhBudgets || [];
+    state.householdPlans = d.householdPlans || [];
     render();
   }).catch(e => toast(e.message));
 }
@@ -1687,6 +1741,8 @@ document.querySelectorAll('.subtab-btn').forEach(btn => {
   };
 });
 
+$('addPlanBtn').onclick = () => openHouseholdPlanModal();
+['planTypeFilter','planStatusFilter','planSearch'].forEach(id => { $(id).oninput = renderHouseholdPlanner; });
 $('hhQuickAddItem').onclick = () => openHouseholdItemModal();
 $('hhAddItemBtn').onclick = () => openHouseholdItemModal();
 $('hhQuickAddBill').onclick = () => openHouseholdBillModal();
