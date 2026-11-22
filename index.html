@@ -6,7 +6,7 @@
 <style>
 :root{
   --green:#176b50;--green2:#e6f3ed;--blue:#2563b8;--blue2:#eaf1fc;
-  --teal:#0d9488;--teal2:#e1f3f1;--ink:#18364b;--muted:#728395;
+  --teal:#176b50;--teal2:#e6f3ed;--ink:#18364b;--muted:#728395;
   --line:#e2eaf0;--white:#fff;--red:#c44747;--amber:#bb7a24;--orange:#d97706;
   --shadow:0 7px 25px rgba(20,52,73,.07);
 }
@@ -22,7 +22,7 @@ button:disabled{opacity:.5;cursor:not-allowed;transform:none}
 .warn-btn{background:#fff3df;color:var(--amber)}
 .small{padding:6px 10px;font-size:12px}
 .app{display:flex;min-height:100vh}
-.sidebar{width:256px;background:linear-gradient(165deg,#143f3b,#0d514a);color:#fff;flex:0 0 256px;padding:23px 15px;display:flex;flex-direction:column}
+.sidebar{width:256px;background:linear-gradient(165deg,#174a9b,#176b50);color:#fff;flex:0 0 256px;padding:23px 15px;display:flex;flex-direction:column}
 .brand{font-size:23px;font-weight:850;letter-spacing:.7px;padding:8px 11px 24px;color:#fff}
 .brand small{display:block;font-size:10px;letter-spacing:1.6px;color:#a9d7cd;font-weight:600}
 .nav{display:grid;gap:5px}
@@ -84,7 +84,7 @@ button:disabled{opacity:.5;cursor:not-allowed;transform:none}
 .bucket{border:1px solid var(--line);border-radius:12px;padding:13px}
 .bucket-top{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px}
 .bar{height:9px;border-radius:30px;background:#eaf0f4;overflow:hidden;margin-top:9px}
-.bar span{height:100%;display:block;background:linear-gradient(90deg,#176b50,#0d9488);border-radius:30px;transition:width .3s}
+.bar span{height:100%;display:block;background:linear-gradient(90deg,#2563b8,#176b50);border-radius:30px;transition:width .3s}
 .inline-note{font-size:12px;color:var(--muted);margin-top:5px}
 .modal-bg{position:fixed;inset:0;background:#0e253b88;backdrop-filter:blur(3px);z-index:30;display:none;align-items:center;justify-content:center;padding:16px}
 .modal{background:#fff;border-radius:18px;padding:22px;max-width:680px;width:100%;max-height:90vh;overflow:auto;box-shadow:0 20px 60px #102e4350}
@@ -115,7 +115,7 @@ button:disabled{opacity:.5;cursor:not-allowed;transform:none}
 .dot{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:6px}
 .trend-bars{display:flex;align-items:flex-end;gap:12px;height:150px;padding-top:20px}
 .trend-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
-.trend-bar{width:100%;max-width:42px;background:linear-gradient(180deg,#0d9488,#176b50);border-radius:8px 8px 0 0;min-height:4px;transition:.3s}
+.trend-bar{width:100%;max-width:42px;background:linear-gradient(180deg,#2563b8,#176b50);border-radius:8px 8px 0 0;min-height:4px;transition:.3s}
 .trend-val{font-size:10px;font-weight:700;color:var(--muted)}
 .trend-lbl{font-size:11px;font-weight:700;color:var(--ink)}
 .toast{position:fixed;bottom:20px;right:20px;background:#143f3b;color:#fff;padding:12px 18px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.2);z-index:50;font-weight:650;display:none}
@@ -130,10 +130,10 @@ button:disabled{opacity:.5;cursor:not-allowed;transform:none}
   <div class="card" style="max-width:540px;margin:8vh auto;padding:30px">
     <div class="brand" style="color:var(--green);padding:0">MY MONEY<small style="color:var(--muted)">PERSONAL & HOUSEHOLD FINANCE</small></div>
     <h2>Connect your finance sheet</h2>
-    <p class="muted">Paste your Google Apps Script Web App URL and private access key. They are saved in your Google Sheet's <b>Settings</b> tab for seamless cross-platform access.</p>
-    <div class="field"><label>Apps Script Web App URL</label><input id="apiUrl" placeholder="https://script.google.com/macros/s/.../exec"></div>
+    <p class="muted">Enter your Private Key. The system retrieves the saved connection URL from your Google Sheet automatically.</p>
+    
     <div class="field" style="margin-top:12px"><label>Private access key</label><input id="apiKey" type="password"></div>
-    <button class="primary" id="connectBtn" style="margin-top:14px">Connect & Sync with Google Sheets</button>
+    <button class="primary" id="connectBtn" style="margin-top:14px">Connect using Private Key</button>
     <div id="loginStatus" class="status"></div>
   </div>
 </div>
@@ -149,6 +149,7 @@ button:disabled{opacity:.5;cursor:not-allowed;transform:none}
       <button data-tab="transactions"><span>☷ Transactions</span></button>
       <button data-tab="budget"><span>◉ Budget Standards</span></button>
       <button data-tab="bills"><span>▤ All Bills</span></button>
+      <button data-tab="pending"><span>⌛ Pending Bills</span><span id="pendingBadge" class="nav-badge hidden">0</span></button>
       <button data-tab="unplanned"><span>⚑ Unplanned</span></button>
       <button data-tab="goals"><span>◇ Savings & Goals</span></button>
       <button data-tab="reports"><span>▥ Reports</span></button>
@@ -404,7 +405,8 @@ button:disabled{opacity:.5;cursor:not-allowed;transform:none}
             <p class="muted">Record salary, business revenue, dividends, refunds, or side income. Automatically updates dashboard balances and budget ratios.</p>
             <form id="incomeForm">
               <div class="form-grid">
-                <div class="field"><label>Date *</label><input type="date" id="incomeDate" required></div>
+                <div class="field"><label>Income Date *</label><input type="date" id="incomeDate" required></div>
+                <div class="field"><label>Income Month (reconciliation month) *</label><input type="month" id="incomeMonth" required></div>
                 <div class="field"><label>Amount (KES) *</label><input type="number" id="incomeAmount" min="0.01" step=".01" required></div>
                 <div class="field"><label>Income Source *</label><select id="incomeSource" required></select></div>
                 <div class="field"><label>Category *</label><select id="incomeCategory" required><option>Salary</option><option>Business income</option><option>Investment returns</option><option>Refund / Reimbursement</option><option>Other income</option></select></div>
@@ -543,7 +545,17 @@ button:disabled{opacity:.5;cursor:not-allowed;transform:none}
         </div>
       </section>
 
-      <!-- ==================== 8. UNPLANNED EXPENSES ==================== -->
+      <!-- ==================== PENDING BILL RECONCILIATION ==================== -->
+      <section class="tab-panel" id="pending">
+        <div class="card">
+          <h2>Pending Bills & Payment Reconciliation</h2>
+          <p class="muted">Outstanding amounts are deducted automatically from available cumulative income. Record payments through M-Pesa allocation or bill settlement.</p>
+          <div class="mini-cards" style="grid-template-columns:repeat(3,1fr)"><div class="mini-card">Outstanding<b id="pendingTotal">KES 0</b></div><div class="mini-card">General bills<b id="pendingGeneral">KES 0</b></div><div class="mini-card">Household bills<b id="pendingHousehold">KES 0</b></div></div>
+          <div class="table-wrap"><table class="table"><thead><tr><th>Bill</th><th>Category</th><th>Due Date</th><th>Amount</th><th>Paid</th><th>Outstanding</th><th>Status</th></tr></thead><tbody id="pendingRows"></tbody></table></div>
+        </div>
+      </section>
+
+<!-- ==================== 8. UNPLANNED EXPENSES ==================== -->
       <section class="tab-panel" id="unplanned">
         <div class="card">
           <h2>Unplanned Expenses</h2>
@@ -637,13 +649,8 @@ function toast(msg) {
 
 function getConn() {
   const params = new URLSearchParams(window.location.search);
-  const urlParam = params.get('url');
   const keyParam = params.get('key');
-  if (urlParam && keyParam) {
-    localStorage.setItem('myMoneyUrl', urlParam.trim());
-    localStorage.setItem('myMoneyKey', keyParam.trim());
-    window.history.replaceState({}, document.title, window.location.pathname);
-  }
+  if (keyParam) { localStorage.setItem('myMoneyKey', keyParam.trim()); window.history.replaceState({}, document.title, window.location.pathname); }
   return { url: localStorage.getItem('myMoneyUrl') || '', key: localStorage.getItem('myMoneyKey') || '' };
 }
 
@@ -683,7 +690,7 @@ function setView() {
 function updateMagicLinkDisplay(url, key) {
   if (!$('magicSyncLink')) return;
   const base = window.location.origin + window.location.pathname;
-  $('magicSyncLink').value = `${base}?url=${encodeURIComponent(url)}&key=${encodeURIComponent(key)}`;
+  $('magicSyncLink').value = `${base}?key=${encodeURIComponent(key)}`;
 }
 
 /* ==================== DATE & FORECAST CALCULATIONS ==================== */
@@ -797,7 +804,7 @@ function parseMpesa(text) {
 }
 
 function bucketFor(cat) { return state.standards.find(x => String(x.category) === String(cat))?.bucket || ''; }
-function monthTx() { return state.transactions.filter(t => String(t.date || '').slice(0, 7) === state.month); }
+function monthTx() { return state.transactions.filter(t => String((t.type === 'income' ? (t.incomeMonth || t.date) : t.date) || '').slice(0, 7) === state.month); }
 
 function sums() {
   const tx = monthTx();
@@ -825,6 +832,7 @@ function render() {
   renderTransactions();
   renderStandards();
   renderBills();
+  renderPendingBills(s);
   renderGoals();
   renderReports();
   renderBuckets();
@@ -1200,11 +1208,26 @@ function statusPill(status) {
   return `<span class="pill bad">${esc(status)}</span>`;
 }
 
+function renderPendingBills(s) {
+  const gen = state.monthlyBills.filter(b => b.month === state.month && Number(b.balance || 0) > 0.01 && b.status !== 'Settled');
+  const hh = state.hhBills.map(enrichHouseholdBill).filter(b => b.balance > 0.01);
+  const rows = [
+    ...gen.map(b => ({name:b.name,category:b.category,due:b.dueDate,amount:b.amount,paid:b.paidAmount||0,balance:b.balance,status:b.status||'Pending'})),
+    ...hh.map(b => ({name:b.name,category:b.category,due:b.dueDate,amount:b.expectedAmount,paid:b.amountPaid,balance:b.balance,status:b.status}))
+  ].sort((a,b)=>String(a.due||'').localeCompare(String(b.due||'')));
+  const total=rows.reduce((n,r)=>n+Number(r.balance||0),0), g=gen.reduce((n,b)=>n+Number(b.balance||0),0), h=hh.reduce((n,b)=>n+b.balance,0);
+  if ($('pendingTotal')) $('pendingTotal').textContent=money(total);
+  if ($('pendingGeneral')) $('pendingGeneral').textContent=money(g);
+  if ($('pendingHousehold')) $('pendingHousehold').textContent=money(h);
+  if ($('pendingBadge')) { $('pendingBadge').textContent=rows.length; $('pendingBadge').classList.toggle('hidden',!rows.length); }
+  if ($('pendingRows')) $('pendingRows').innerHTML=rows.map(r=>`<tr><td><strong>${esc(r.name)}</strong></td><td>${esc(r.category||'—')}</td><td>${esc(r.due||'—')}</td><td>${money(r.amount)}</td><td>${money(r.paid)}</td><td><strong>${money(r.balance)}</strong></td><td>${statusPill(r.status)}</td></tr>`).join('') || '<tr><td colspan="7" class="empty">No outstanding bills for the selected month.</td></tr>';
+}
+
 /* ==================== INCOME MANAGER TAB ==================== */
 function renderIncomeTab(s) {
-  const incMonth = monthTx().filter(t => t.type === 'income');
+  const incMonth = state.transactions.filter(t => t.type === 'income' && String(t.incomeMonth || t.date || '').slice(0,7) === state.month);
   const yr = state.month.slice(0, 4);
-  const incYtd = state.transactions.filter(t => t.type === 'income' && String(t.date).startsWith(yr)).reduce((a, t) => a + Number(t.amount || 0), 0);
+  const incYtd = state.transactions.filter(t => t.type === 'income' && String(t.incomeMonth || t.date).startsWith(yr)).reduce((a, t) => a + Number(t.amount || 0), 0);
 
   const hhMonthSpend = monthTx().filter(t => ['expense', 'unplanned expense'].includes(t.type) && (t.hhCategory || HH_CATEGORIES.includes(t.category))).reduce((a, t) => a + Number(t.amount || 0), 0);
   const ratio = s.income > 0 ? (hhMonthSpend / s.income) * 100 : 0;
@@ -1225,7 +1248,7 @@ function renderIncomeTab(s) {
     return `<div class="bucket"><div class="bucket-top"><strong>${esc(src)}</strong><b>${money(amt)} (${pct.toFixed(0)}%)</b></div><div class="bar"><span style="width:${pct}%"></span></div></div>`;
   }).join('') || '<div class="empty">No income recorded for this month yet.</div>';
 
-  $('incomeLedgerRows').innerHTML = state.transactions.filter(t => t.type === 'income').sort((a, b) => String(b.date).localeCompare(String(a.date))).map(t => `
+  $('incomeLedgerRows').innerHTML = state.transactions.filter(t => t.type === 'income').sort((a, b) => String(b.incomeMonth || b.date).localeCompare(String(a.incomeMonth || a.date))).map(t => `
     <tr>
       <td>${esc(t.date)}</td>
       <td><strong>${esc(t.incomeSource || '—')}</strong></td>
@@ -1529,7 +1552,7 @@ window.deleteHhBill = async id => {
 
 /* ==================== EXISTING MODALS & EVENT HANDLERS ==================== */
 const tabTitles = {
-  dashboard: 'Dashboard', household: 'Household Management', income: 'Income Manager',
+  dashboard: 'Dashboard', household: 'Household Management', income: 'Income Manager', pending: 'Pending Bills',
   mpesa: 'M-Pesa Entry & Allocation', transactions: 'Transactions', budget: 'Budget Standards',
   bills: 'Bills Register', unplanned: 'Unplanned Expenses', goals: 'Savings & Goals',
   reports: 'Reports', settings: 'Settings'
@@ -1635,13 +1658,16 @@ window.deleteBucket = async i => { try { await api('deleteBucket', { bucket: sta
 
 /* ==================== WIRE UP EVENT LISTENERS ==================== */
 $('connectBtn').onclick = async () => {
-  const url = $('apiUrl').value.trim(), key = $('apiKey').value.trim();
-  if (!url || !key) { showStatus($('loginStatus'), 'Enter both URL and access key.', false); return; }
-  localStorage.setItem('myMoneyUrl', url); localStorage.setItem('myMoneyKey', key);
+  const key = $('apiKey').value.trim();
+  if (!key) { showStatus($('loginStatus'), 'Enter your Private Key.', false); return; }
+  const bootstrapUrl = 'https://script.google.com/macros/s/AKfycby-M0Slv3y98U0TyLXK8fxvGmnemwudmwtN9_510RTlFNrF-xjsAvO4FyCbos8DBQc/exec';
   try {
-    await api('saveConnectionSettings', { url, newKey: key });
-    setView();
-    refreshAll();
+    const response = await fetch(bootstrapUrl, { method:'POST', redirect:'follow', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify({action:'getData',key}) });
+    const raw = await response.text(); let payload; try { payload=JSON.parse(raw); } catch { throw Error('Connection endpoint returned invalid data.'); }
+    if (!payload.ok) throw Error(payload.error || 'Private Key validation failed.');
+    const url = payload.data?.connection?.url || bootstrapUrl;
+    localStorage.setItem('myMoneyUrl',url); localStorage.setItem('myMoneyKey',key);
+    setView(); refreshAll();
   } catch (e) { showStatus($('loginStatus'), e.message, false); }
 };
 
@@ -1686,7 +1712,7 @@ $('saveHhBudgetsBtn').onclick = async () => {
     await api('saveHouseholdBudgets', { budgets });
     toast('Household budgets saved.');
     refreshAll();
-  } catch (e) { toast(e.message); }
+  } catch (e) { toast(e?.message || String(e) || 'Could not save household budgets.'); console.error('saveHouseholdBudgets error',e); }
 };
 
 // M-Pesa Form & Household Linkage
@@ -1781,7 +1807,7 @@ $('incomeForm').onsubmit = async e => {
   const btn = $('saveIncome'); if (btn.disabled) return; btn.disabled = true;
   try {
     await api('addTransaction', {
-      requestId: incomeRequestId, date: $('incomeDate').value, description: $('incomeDescription').value,
+      requestId: incomeRequestId, date: $('incomeDate').value, incomeMonth: $('incomeMonth').value || $('incomeDate').value.slice(0,7), description: $('incomeDescription').value,
       amount: Number($('incomeAmount').value), type: 'income', category: $('incomeCategory').value,
       bucket: '', paymentMethod: $('incomeMethod').value, incomeSource: $('incomeSource').value,
       note: $('incomeNote').value
@@ -1796,6 +1822,8 @@ $('incomeForm').onsubmit = async e => {
 };
 
 $('incomeDate').value = todayISO();
+$('incomeMonth').value = todayISO().slice(0,7);
+$('incomeDate').onchange = () => { if (!$('incomeMonth').value) $('incomeMonth').value = $('incomeDate').value.slice(0,7); };
 $('manualAdd').onclick = () => transactionForm();
 $('addUnplanned').onclick = () => transactionForm({ unplanned: true, title: 'Record unplanned expense' });
 
